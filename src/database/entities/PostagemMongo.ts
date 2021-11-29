@@ -13,7 +13,7 @@ export class PostagemMongo
     conteudo: string;
  
     @CreateDateColumn()
-    createdAt: Data;
+    createdAt: Date;
  
     @UpdateDateColumn()
     updatedAt: Date;

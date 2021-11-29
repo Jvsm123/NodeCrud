@@ -5,9 +5,9 @@
     "main": "server.js",
     "scripts": {
         "tsnode": "ts-node-dev src/server",
-        "front": "cd ./src/front && npm start",
+        "front": "cd ./src/front && yarn start",
         "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
-        "dev": "concurrently --kill-others-on-fail \"npm run tsnode\" \"npm run front\" "
+        "dev": "concurrently --kill-others-on-fail \"yarn run tsnode\" \"yarn run front\" "
     },
     "author": "Jvsm123",
     "license": "ISC",
@@ -18,7 +18,8 @@
         "mongodb": "^3.7.3",
         "mysql2": "^2.3.3",
         "reflect-metadata": "^0.1.13",
-        "typeorm": "^0.2.41"
+        "typeorm": "^0.2.41",
+        "typescript": "^4.5.2"
     },
     "devDependencies": {
         "@types/ejs": "^3.1.0",

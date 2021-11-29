@@ -26,5 +26,9 @@
         "strictNullChecks": true
      
     },
-    "include": ["src"]
+    "include": ["src"],
+    "resolve":
+    {
+        "alias": { "@mui/styled-engine": "@mui/styled-engine-sc" }
+    }
 }

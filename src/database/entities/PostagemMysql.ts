@@ -9,7 +9,7 @@ export class PostagemMysql
     @Column({ nullable: false })
     titulo: string;
  
-    @Column({ type: "text", nullable: false });
+    @Column({ type: 'text', nullable: false })
     conteudo: string;
  
     @CreateDateColumn()

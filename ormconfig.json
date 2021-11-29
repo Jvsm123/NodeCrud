@@ -1,30 +1,36 @@
-[
-    {
-        "name": "Mysql",
-        "type": "mysql",
-        "host": "localhost",
-        "port": 3306,
-        "username": "jvsm123",
-        "password": "1234",
-        "database": "sistemaDePostagens",
-        "synchronize": true,
-        "logging": false,
-        "entities": [],
-        "migrations": [],
-    },
-    {
-        "name": "MongoDB",
-        "type": "mongodb",
-        "host": "127.0.0.1",
-        "port": 27017,
-        "username": "dbTeste",
-        "password": "1234",
-        "database": "sistemaDePostagens",
-        "useUnifiedTopology": true,
-        "useNewUrlParser": true,
-        "synchronize": true,
-        "logging": false,
-        "entities": [],
-        "migrations": [],
-    }
-]
+[{
+    "name": "Mysql",
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "username": "jvsm123",
+    "password": "1234",
+    "database": "sistemaDePostagens",
+    "synchronize": true,
+    "logging": false,
+    "entities":
+    [
+        "./src/database/entities/PostagemMysql.ts",
+        "./src/database/entities/UsuariosMysql.ts"
+    ],
+    "migrations": []
+},
+{
+    "name": "MongoDB",
+    "type": "mongodb",
+    "host": "127.0.0.1",
+    "port": 27017,
+    "username": "dbTeste",
+    "password": "1234",
+    "database": "sistemaDePostagens",
+    "useUnifiedTopology": true,
+    "useNewUrlParser": true,
+    "synchronize": true,
+    "logging": false,
+    "entities":
+    [
+        "./src/database/entities/PostagemMongo.ts",
+        "./src/database/entities/UsuariosMongo.ts"
+    ],
+    "migrations": []
+}]
