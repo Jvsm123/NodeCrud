@@ -1,9 +1,18 @@
-export const Api = async () =>
+export class Api
 {
-    const response = await fetch("http://localhost:8080/");
-    const body = await response.json();
+    static async ListAdm(): Promise<Array<{}>>
+    {
+        const response = await fetch("http://localhost:8080/admin/categorias");
+     
+        const body = await response.json();
+     
+        if( response.status !== 200 ) throw new Error( body.message );
+     
+        return body;
+    };
  
-    if( response.status !== 200 ) throw new Error( body.message );
+    static async SendAdm( data: Object ): Promise<void>
+    {
  
-    return body;
+    }
 };

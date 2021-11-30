@@ -9,4 +9,6 @@ export default createGlobalStyle`
         box-sizing: border-box;
         text-decoration: none;
     }
+ 
+    #root { height: 100vh }
 `;

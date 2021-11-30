@@ -1,9 +1,17 @@
 import { Component } from 'react';
 
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import TypoGraphy from '@mui/material/Typography';
+import {
+    Container,
+    Button,
+    CircularProgress,
+    Divider,
+    List,
+    ListItem,
+    ListItemText,
+    Typography
+} from '@mui/material';
+
+import { Link } from 'react-router-dom';
 
 import { Navbar } from '../../UI/Navbar/Navbar';
 
@@ -17,33 +25,45 @@ export class ListComponent extends Component< {}, State >
  
     async componentDidMount(): Promise<void>
     {
-        const data: Array<Object> = await Api();
-
+        const data: Array<Object> = await Api.ListAdm();
+     
         this.setState( { data: data } )
     };
  
     render(): React.ReactElement<HTMLElement>
     {
-        console.log( this.state )
         if( this.state.data )
+        {
             return (
-            <>
-                <Navbar/>
-
-                <List>
-                    {this.state.data.map( (e: any) =>
-                        <ListItem>
-                            <TypoGraphy font-size="22pt" variant="body1"
-                                color="primary"
-                            >
-                                {e.titulo}
-                            </TypoGraphy>
-                            <ListItemText>{e.conteudo}</ListItemText>
-                        </ListItem>
-                    )}
-                </List>
-            </>
+                <>
+                    <Navbar/>
+                 
+                    <Container>
+                        <Typography color="primary" variant="h3">Lista de Categorias</Typography>
+                     
+                        <Divider sx={{marginBottom: "10px"}}/>
+                     
+                        <Link to="/admin/addPostagens">
+                            <Button variant="contained" color="success">
+                                Nova Categoria
+                            </Button>
+                        </Link>
+                     
+                        <List>
+                            {this.state.data.map( (e: any) =>
+                                <ListItem>
+                                    <Typography variant="h5" color="secondary">
+                                        {e.titulo}
+                                    </Typography>
+                                 
+                                    <ListItemText>{e.conteudo}</ListItemText>
+                                </ListItem>
+                            )}
+                        </List>
+                    </Container>
+                </>
             );
-        else return <Navbar/>
+        }
+        else return <CircularProgress color="secondary" variant="indeterminate"/>;
     };
 };

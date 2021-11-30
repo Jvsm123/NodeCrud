@@ -8,8 +8,6 @@ export class AllPostsService
     async execute(): Promise<any[]>
     {
         const connection = new Connection();
-
-        console.log(connection);
      
         const mongoConn = await connection.GetConnection('mongo');
      

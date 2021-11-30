@@ -1,37 +1,36 @@
-import { createConnection } from 'typeorm';
+import { createConnection, getConnection } from 'typeorm';
 
-interface IConnection<T>
-{
-    private static connection: null | [T];
-    public GetConnection: Function;
-    private GetMysqlConnection: Function;
-    private GetMongoConnection: Function;
-}
+var status = false;
 
-export class Connection implements IConnection
+export class Connection
 {
-    private static connection: null | [T] = null;
- 
-    constructor()
+    public async GetConnection( db: string ): Promise<any | boolean>
     {
-        static private this.connection = null;
+        if( db === 'mongo' ) return await this.SetMongoConnection();
+        if( db === 'mysql' ) return await this.SetMongoConnection();
     };
  
-    public async GetConnection( db: string ): Promise<any> | boolean
+    private async SetMysqlConnection(): Promise<any>
     {
-        if( this.connection ) return true;
+        if( !status )
+        {
+            status = true;
+         
+            return await createConnection("Mysql");
+        };
      
-        if( db === 'mongo' ) return await this.GetMongoConnection();
-        if( db === 'mysql' ) return await this.GetMongoConnection();
+        return await getConnection("MongoDB");
     };
  
-    private async GetMysqlConnection(): Promise<any>
+    private async SetMongoConnection(): Promise<any>
     {
-        return await createConnection("Mysql");
-    };
- 
-    private async GetMongoConnection(): Promise<any>
-    {
-        return await createConnection("Mongo");
+        if( !status )
+        {
+            status = true;
+         
+            return await createConnection("MongoDB");
+        };
+     
+        return await getConnection("MongoDB");
     };
 };
