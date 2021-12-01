@@ -9,20 +9,41 @@ import {
     Typography
 } from '@mui/material';
 
+import { Navigate } from 'react-router-dom';
+
 import { Navbar } from '../../UI/Navbar/Navbar';
 
 import { Api } from '../../Functions/ApiHandler';
 
-type State = { nome: string; slug: string; };
+type State =
+{
+    nome: string;
+    slug: string;
+    redirectTo: null | string;
+};
 
 export class AddComponent extends Component< {}, State >
 {
-    state = { nome: "", slug: ""};
+    state = { nome: "", slug: "", redirectTo: null };
  
-    Api( state: State ) { Api.SendAdm( state ) };
+    Api( state: State ): React.ReactElement<undefined> | void
+    {
+        if( state.nome !== "" && state.slug !== "")
+        {
+            const { nome, slug } = state;
+         
+            Api.SendAdm({ nome: nome, slug: slug });
+         
+            this.setState({ redirectTo: "/admin/categorias" });
+        }
+        else alert("Dados invalidos!");
+    };
  
     render(): React.ReactElement<HTMLElement>
     {
+        if( this.state.redirectTo )
+            return <Navigate to={this.state.redirectTo}/>
+     
         return(
             <>
                 <Navbar/>
@@ -57,12 +78,16 @@ export class AddComponent extends Component< {}, State >
                         }}>
                             <InputLabel sx={{fontSize: "25px"}}>Nome:</InputLabel>
                             <TextField
+                                type="text"
+                                inputProps={{maxLength: 30}}
                                 sx={{marginBottom: "15px"}}
                                 onChange={(e) => this.setState({nome: e.target.value})}
                             />
 
                             <InputLabel sx={{fontSize: "25px"}}>Slug:</InputLabel>
                             <TextField
+                                inputProps={{maxLength: 30}}
+                                type="text"
                                 onChange={(e) => this.setState({slug: e.target.value})}
                             />
 
@@ -70,7 +95,7 @@ export class AddComponent extends Component< {}, State >
                                 variant="contained"
                                 color="success"
                                 sx={{marginTop: "25px"}}
-                                onClick={() => this.Api(this.state)}
+                                onClick={() => this.Api(this.state) }
                             >Criar Categeoria</Button>
                         </Card>
                     </Container>

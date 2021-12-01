@@ -1,4 +1,5 @@
 import { AllPostsService } from '../services/AllPostsService';
+
 import { Request, Response } from 'express';
 
 export class AllPostsController

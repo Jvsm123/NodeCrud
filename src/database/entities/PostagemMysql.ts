@@ -8,8 +8,11 @@ export class PostagemMysql
  
     @Column({ nullable: false })
     titulo: string;
+
+    @Column({ type: 'text' })
+    slug: string;
  
-    @Column({ type: 'text', nullable: false })
+    @Column({ type: 'text' })
     conteudo: string;
  
     @CreateDateColumn()

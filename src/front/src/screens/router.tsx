@@ -11,6 +11,9 @@ import { IndexAdmin } from './admin/IndexAdmin';
 //Users
 import { IndexUsuarios } from './usuarios/IndexUsuarios';
 
+//Erros
+import { NotFound } from './erros/NotFound';
+
 export class Router extends Component< {}, {} >
 {
     render()
@@ -24,6 +27,8 @@ export class Router extends Component< {}, {} >
                         <Route path="categorias" element={ <IndexPostagens/> }/>
                         <Route path="addPostagens" element={ <AddPostagens/> } />
                     </Route>
+
+                    <Route path="*" element={ <NotFound/> }/>
                  
                 </Routes>
              

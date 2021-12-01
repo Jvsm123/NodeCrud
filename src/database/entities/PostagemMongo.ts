@@ -8,8 +8,11 @@ export class PostagemMongo
  
     @Column({ nullable: false })
     titulo: string;
+
+    @Column({ nullable: true })
+    slug: string;
  
-    @Column({ type: "text", nullable: false })
+    @Column({ type: "text" })
     conteudo: string;
  
     @CreateDateColumn()
