@@ -4,6 +4,7 @@
     "private": true,
     "proxy": "http://localhost:8080/",
     "dependencies": {
+        "@mui/icons-material": "^5.2.0",
         "@mui/material": "^5.2.1",
         "@mui/styled-engine-sc": "^5.1.0",
         "@testing-library/jest-dom": "^5.11.4",

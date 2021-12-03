@@ -4,14 +4,14 @@ import { NewPostsService } from '../services/NewPostsService';
 
 export class NewPostsController
 {
-    async handler( req: Request, res: Response ): Promise< void >
+    async handler( req: Request, res: Response ): Promise< Response >
     {
         const { nome, slug } = req.body;
      
         const newPostsService = new NewPostsService();
      
-        const newPost = newPostsService.execute( { nome: nome, slug: slug } );
+        const newPostMsg = await newPostsService.execute( { nome: nome, slug: slug } );
      
-        res.redirect( "http://localhost:3000/admin/categorias" );
+        return res.json( newPostMsg );
     };
 };

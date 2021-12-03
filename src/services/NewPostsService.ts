@@ -2,7 +2,7 @@ import { getCustomRepository } from 'typeorm';
 
 import { PostagemMongoRepo } from '../repositories/PostagensRepositories';
 
-import { Connection } from '../database/Connection'
+import { Connection } from '../database/Connection';
 
 interface IData
 {
@@ -12,7 +12,7 @@ interface IData
 
 export class NewPostsService
 {
-    async execute( { nome, slug }: IData ): Promise< any[] >
+    async execute( { nome, slug }: IData ): Promise< string >
     {
         const connection = new Connection();
      
@@ -21,12 +21,10 @@ export class NewPostsService
         const postsMongoRepo = mongoConn
         .getCustomRepository( PostagemMongoRepo );
      
-        const newPost = await postsMongoRepo.save(
+        return await postsMongoRepo.save(
         {
             titulo: nome,
             slug: slug
-        });
-     
-        return newPost;
+        }).then( () => { return "Sucesso ao Salvar!" } );
     };
 };

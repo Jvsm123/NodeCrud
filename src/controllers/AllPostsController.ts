@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 
 export class AllPostsController
 {
-    async handler( req: Request, res: Response ): Promise< Response< any, Record< string, any > > >
+    async handler( req: Request, res: Response ): Promise< Response >
     {
         const allPostsService = new AllPostsService();
      

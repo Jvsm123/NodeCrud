@@ -13,27 +13,28 @@ import {
 
 import { Navigate } from 'react-router-dom';
 
-import { Navbar } from '../../UI/Navbar/Navbar';
-
 import { Api } from '../../Functions/ApiHandler';
+
+interface ILocationProps
+{
+    
+};
 
 interface State
 {
     nome: string;
     slug: string;
-    msg: string | number;
     redirectTo: null | string;
     pop: boolean;
 };
 
-export class AddComponent extends Component< {}, State >
+export class EditComponent extends Component< ILocationProps, State >
 {
     state =
     {
-        nome: "",
-        slug: "",
+        nome: this.props.titulo,
+        slug: this.props.slug,
         redirectTo: null,
-        msg: "",
         pop: false
     };
  
@@ -43,10 +44,10 @@ export class AddComponent extends Component< {}, State >
         {
             const { nome, slug } = state;
          
-            Api.SendAdm({ nome: nome, slug: slug })
-            .then( ( res: string ) =>
+            Api.EditAdm({ nome: nome, slug: slug })
+            .then( (res: string) =>
             {
-                sessionStorage.setItem("msg", res );
+                sessionStorage.setItem("msg", res);
              
                 this.setState({ redirectTo: "/admin/categorias" });
             });
@@ -56,20 +57,14 @@ export class AddComponent extends Component< {}, State >
  
     render(): React.ReactElement<HTMLElement>
     {
-        if( this.state.redirectTo )
-            return <Navigate
-                to={this.state.redirectTo}
-                state={this.state.msg}
-            />
-     
-        return(
+        return (
             <>
                 <Navbar/>
              
                 { this.state.pop &&
                     <Snackbar
                         open={this.state.pop}
-                        onClick={() => this.setState({pop: false})}
+                        onClick={() => this.setState({ pop: false })}
                         sx={{zIndex: 99}}
                     >
                         <Alert severity="error">
@@ -86,7 +81,8 @@ export class AddComponent extends Component< {}, State >
                     alignItems: "center",
                     justifyContent: "center",
                     height: '80vh'
-                }}>
+                }}
+                >
                     <Container>
                         <Typography
                             variant="h2"
@@ -97,26 +93,34 @@ export class AddComponent extends Component< {}, State >
                                 color: "#707070"
                             }}
                         >
-                            Nova Categoria
+                            Editar {this.props.titulo}
                         </Typography>
-                        <Card variant="outlined" sx={
-                        {
-                            width: "100%",
-                            padding: 10,
-                            display: "flex",
-                            flexDirection: "column",
-                            borderColor: "#DCFFDB",
-                            backgroundColor: "#EBFFEB"
-                        }}>
-                            <InputLabel sx={{fontSize: "25px"}}>Nome:</InputLabel>
+                     
+                        <Card
+                            variant="outlined"
+                            sx={
+                            {
+                                width: "100%",
+                                padding: 10,
+                                display: "flex",
+                                flexDirection: "column",
+                                borderColor: "#DCFFDB",
+                                backgroundColor: "#EBFFEB"
+                            }}
+                        >
+                            <InputLabel sx={{fontSize: "25px"}}
+                            >
+                                Novo Titulo: {this.props.titulo}
+                            </InputLabel>
                             <TextField
-                                type="text"
                                 inputProps={{maxLength: 30}}
-                                sx={{marginBottom: "15px"}}
+                                type="text"
                                 onChange={(e) => this.setState({nome: e.target.value})}
                             />
 
-                            <InputLabel sx={{fontSize: "25px"}}>Slug:</InputLabel>
+                            <InputLabel sx={{fontSize: "25px"}}>
+                                Novo Slug: {this.props.slug}
+                            </InputLabel>
                             <TextField
                                 inputProps={{maxLength: 30}}
                                 type="text"
@@ -124,11 +128,13 @@ export class AddComponent extends Component< {}, State >
                             />
 
                             <Button
-                                variant="contained"
-                                color="success"
-                                sx={{marginTop: "25px"}}
-                                onClick={() => this.Api(this.state) }
-                            >Criar Categeoria</Button>
+                                variant='contained'
+                                color="info"
+                                sx={{marginTop: '25px'}}
+                                onClick={() => this.Api(this.state)}
+                            >
+                                Alterar
+                            </Button>
                         </Card>
                     </Container>
                 </Container>

@@ -1,7 +1,12 @@
-interface IData
+interface IDataSend
 {
     nome: string;
     slug: string;
+};
+
+interface IDataEdit extends IDataSend
+{
+    id: string;
 };
 
 export class Api
@@ -18,7 +23,7 @@ export class Api
         return body;
     };
  
-    static async SendAdm( { nome, slug }: IData ): Promise< void >
+    static async SendAdm( { nome, slug }: IDataSend ): Promise< string >
     {
         const response = await fetch (
             "http://localhost:8080/admin/addPostagens",
@@ -36,7 +41,31 @@ export class Api
         const body = await response.json();
      
         if( response.status !== 200 )
-            throw new Error( body.message );
+            return "ERR";
+     
+        return body;
+    };
+ 
+    static async EditAdm( { nome, slug, id }: IDataEdit ): Promise< string >
+    {
+        const response = await fetch(
+            `http://localhost:8080/categorias/edit/${id}`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(
+                {
+                    titulo: nome,
+                    slug: slug,
+                    id: id
+                })
+            }
+        );
+     
+        const body = await response.json();
+     
+        if( response.status !== 200 )
+            return "ERRR";
      
         return body;
     };
