@@ -126,10 +126,9 @@ export class ListComponent extends Component< {}, State >
                                             </DeleteForever>
                                      
                                             <Link
-                                                to={
-                                                {
+                                                to={{
                                                     pathname: "/admin/editPostagens",
-                                                    state: e
+                                                    // state: this.state
                                                 }}
                                             >
                                                 <Edit

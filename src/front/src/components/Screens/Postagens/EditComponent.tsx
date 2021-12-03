@@ -15,15 +15,19 @@ import { Navigate } from 'react-router-dom';
 
 import { Api } from '../../Functions/ApiHandler';
 
+import { Navbar } from '../../UI/Navbar/Navbar';
+
 interface ILocationProps
 {
-    
+    titulo?: string;
+    slug?: string;
+    id?: string;
 };
 
 interface State
 {
-    nome: string;
-    slug: string;
+    nome: string | undefined;
+    slug: string | undefined;
     redirectTo: null | string;
     pop: boolean;
 };
@@ -44,7 +48,7 @@ export class EditComponent extends Component< ILocationProps, State >
         {
             const { nome, slug } = state;
          
-            Api.EditAdm({ nome: nome, slug: slug })
+            Api.EditAdm({ nome: nome, slug: slug, id: this.props.id })
             .then( (res: string) =>
             {
                 sessionStorage.setItem("msg", res);
@@ -117,7 +121,7 @@ export class EditComponent extends Component< ILocationProps, State >
                                 type="text"
                                 onChange={(e) => this.setState({nome: e.target.value})}
                             />
-
+                         
                             <InputLabel sx={{fontSize: "25px"}}>
                                 Novo Slug: {this.props.slug}
                             </InputLabel>
@@ -126,7 +130,7 @@ export class EditComponent extends Component< ILocationProps, State >
                                 type="text"
                                 onChange={(e) => this.setState({slug: e.target.value})}
                             />
-
+                         
                             <Button
                                 variant='contained'
                                 color="info"
