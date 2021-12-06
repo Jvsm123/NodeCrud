@@ -8,7 +8,7 @@ export class AllPostsController
     {
         const allPostsService = new AllPostsService();
      
-        const posts = await allPostsService.execute();
+        const posts = await allPostsService.execute( req.query );
      
         return res.json( posts );
     };

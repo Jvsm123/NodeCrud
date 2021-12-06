@@ -11,14 +11,17 @@ interface IDataEdit extends IDataSend
 
 export class Api
 {
-    static async ListAdm(): Promise< Array< {} > >
+    static async ListAdm( id?: string ): Promise< Array< {} > >
     {
-        const response = await fetch("http://localhost:8080/admin/categorias");
+        let url = "http://localhost:8080/admin/categorias";
+     
+        if( id ) url += `?id=${id}`;
+     
+        const response = await fetch( url );
      
         const body = await response.json();
      
-        if( response.status !== 200 )
-            throw new Error( body.message );
+        if( response.status !== 200 ) throw new Error( body.message );
      
         return body;
     };
@@ -40,13 +43,12 @@ export class Api
      
         const body = await response.json();
      
-        if( response.status !== 200 )
-            return "ERR";
+        if( response.status !== 200 ) return "ERR";
      
         return body;
     };
  
-    static async EditAdm( { nome, slug, id }: IDataEdit ): Promise< string >
+    static async EditAdm( state: any, id: any ): Promise< string >
     {
         const response = await fetch(
             `http://localhost:8080/categorias/edit/${id}`,
@@ -55,8 +57,8 @@ export class Api
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(
                 {
-                    titulo: nome,
-                    slug: slug,
+                    titulo: state.nome,
+                    slug: state.slug,
                     id: id
                 })
             }

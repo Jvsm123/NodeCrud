@@ -17,38 +17,48 @@ import { Api } from '../../Functions/ApiHandler';
 
 import { Navbar } from '../../UI/Navbar/Navbar';
 
-interface ILocationProps
-{
-    titulo?: string;
-    slug?: string;
-    id?: string;
-};
-
 interface State
 {
-    nome: string | undefined;
-    slug: string | undefined;
-    redirectTo: null | string;
+    id: string | null
+    titulo: string | null;
+    nome: string | null;
+    slug: string | null;
+    redirectTo: string | null;
     pop: boolean;
 };
 
-export class EditComponent extends Component< ILocationProps, State >
+export class EditComponent extends Component< {}, State >
 {
     state =
     {
-        nome: this.props.titulo,
-        slug: this.props.slug,
+        id: null,
+        titulo: null,
+        nome: null,
+        slug: null,
         redirectTo: null,
         pop: false
     };
  
-    Api( state: State ): void
+    ApiGet( id: string ): void
+    {
+        Api.ListAdm( id )
+        .then( (res: any) =>
+        {
+            this.setState(
+            {
+                id: res.id,
+                titulo: res.titulo,
+                nome: res.titulo,
+                slug: res.slug
+            });
+        });
+    };
+ 
+    ApiSend( state: State ): void
     {
         if( state.nome !== "" && state.slug !== "" )
         {
-            const { nome, slug } = state;
-         
-            Api.EditAdm({ nome: nome, slug: slug, id: this.props.id })
+            Api.EditAdm( state, this.state.id )
             .then( (res: string) =>
             {
                 sessionStorage.setItem("msg", res);
@@ -97,7 +107,7 @@ export class EditComponent extends Component< ILocationProps, State >
                                 color: "#707070"
                             }}
                         >
-                            Editar {this.props.titulo}
+                            Editar {this.state.titulo}
                         </Typography>
                      
                         <Card
@@ -114,7 +124,7 @@ export class EditComponent extends Component< ILocationProps, State >
                         >
                             <InputLabel sx={{fontSize: "25px"}}
                             >
-                                Novo Titulo: {this.props.titulo}
+                                Novo Titulo: {this.state.titulo}
                             </InputLabel>
                             <TextField
                                 inputProps={{maxLength: 30}}
@@ -123,7 +133,7 @@ export class EditComponent extends Component< ILocationProps, State >
                             />
                          
                             <InputLabel sx={{fontSize: "25px"}}>
-                                Novo Slug: {this.props.slug}
+                                Novo Slug: {this.state.slug}
                             </InputLabel>
                             <TextField
                                 inputProps={{maxLength: 30}}
@@ -135,7 +145,7 @@ export class EditComponent extends Component< ILocationProps, State >
                                 variant='contained'
                                 color="info"
                                 sx={{marginTop: '25px'}}
-                                onClick={() => this.Api(this.state)}
+                                onClick={() => this.ApiSend(this.state)}
                             >
                                 Alterar
                             </Button>

@@ -47,13 +47,16 @@ export class ListComponent extends Component< {}, State >
  
     async componentDidMount(): Promise<void>
     {
-        const data: Array<Object> = await Api.ListAdm();
+        const data: Array< Object > = await Api.ListAdm();
+     
+        console.log( data );
      
         const msg: string | null = sessionStorage.getItem("msg");
      
         if( msg )
         {
             sessionStorage.clear();
+         
             this.setState({ msg: msg });
         };
      
@@ -125,14 +128,8 @@ export class ListComponent extends Component< {}, State >
                                             >
                                             </DeleteForever>
                                      
-                                            <Link
-                                                to={{
-                                                    pathname: "/admin/editPostagens",
-                                                    // state: this.state
-                                                }}
-                                            >
+                                            <Link to={`/admin/editPostagens/${e.id}`}>
                                                 <Edit
-                                                    onClick={() => alert("B")}
                                                     color="primary"
                                                     sx={{cursor: "pointer"}}
                                                 >

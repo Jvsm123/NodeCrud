@@ -11,15 +11,15 @@ const Session = require("express-session");
 const server = Express();
 
 //Configs
-
-    //Sessão e FlashMessages
+ 
+    //Sessão
     server.use( Session(
     {
         secret: "coisa",
         resave: true,
         saveUninitialized: true
     }));
-
+ 
     //Configurações de conexão e host's
     server.use( Express.urlencoded( { extended: true } ) );
     server.use( Express.json() );
