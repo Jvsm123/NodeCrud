@@ -29,7 +29,7 @@ import { Api } from '../../Functions/ApiHandler';
 
 type State =
 {
-    data: Array< Object | never[] >;
+    data: any;
     msg?: string;
     openPop: boolean;
     openCircle: boolean;
@@ -47,9 +47,7 @@ export class ListComponent extends Component< {}, State >
  
     async componentDidMount(): Promise<void>
     {
-        const data: Array< Object > = await Api.ListAdm();
-     
-        console.log( data );
+        const { data } = await Api.ListAdm();
      
         const msg: string | null = sessionStorage.getItem("msg");
      
@@ -99,7 +97,8 @@ export class ListComponent extends Component< {}, State >
                             </Button>
                         </Link>
                      
-                        <List>
+                        { this.state.data.length > 0 &&
+                            <List>
                             { this.state.data.map( (e: any) =>
                                 <Card
                                     sx={{ marginTop: "20px", marginBottom: "20px", padding: "10px" }}
@@ -114,12 +113,12 @@ export class ListComponent extends Component< {}, State >
                                             <ListItemText>
                                                 Slug: {e.slug}
                                             </ListItemText>
-
+                                         
                                             <ListItemText>
                                                 Data de Criação: {e.createdAt}
                                             </ListItemText>
                                         </Stack>
-
+                                     
                                         <Stack direction="row" spacing={2}>
                                             <DeleteForever
                                                 onClick={() => alert("A")}
@@ -127,8 +126,8 @@ export class ListComponent extends Component< {}, State >
                                                 sx={{cursor: "pointer", marginRight: "15px"}}
                                             >
                                             </DeleteForever>
-                                     
-                                            <Link to={`/admin/editPostagens/${e.id}`}>
+                                         
+                                            <Link to={`/admin/editPostagens/?id=${e.id}`}>
                                                 <Edit
                                                     color="primary"
                                                     sx={{cursor: "pointer"}}
@@ -139,7 +138,14 @@ export class ListComponent extends Component< {}, State >
                                     </ListItem>
                                 </Card>
                             )}
-                        </List>
+                            </List>
+                        }
+                     
+                        { this.state.data === [] &&
+                            <Typography variant="h2" sx={{marginTop: "20px"}}>
+                                Não há dados cadastrados no sistema!
+                            </Typography>
+                        }
                     </Container>
                 </>
             );

@@ -8,11 +8,11 @@ import { Connection } from '../database/Connection';
 
 export class AllPostsService
 {
-    async execute( id?: Request.ParsedQs ): Promise< any[] >
+    async execute( ID?: any ): Promise< any[] >
     {
-        console.log( id );
-     
         let allPosts;
+     
+        const { id } = ID;
      
         const connection = new Connection();
      

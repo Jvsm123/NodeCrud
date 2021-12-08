@@ -27,7 +27,7 @@ export class Router extends Component< {}, {} >
                     <Route path="/admin">
                         <Route path="categorias" element={ <IndexPostagens/> } />
                         <Route path="addPostagens" element={ <AddPostagens/> } />
-                        <Route path="editPostagens/:id" element={ <EditPostagens/> } />
+                        <Route path="editPostagens" element={ <EditPostagens/> } />
                     </Route>
                  
                     <Route path="*" element={ <NotFound/> }/>

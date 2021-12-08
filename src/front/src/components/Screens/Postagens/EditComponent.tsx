@@ -41,8 +41,7 @@ export class EditComponent extends Component< {}, State >
  
     ApiGet( id: string ): void
     {
-        Api.ListAdm( id )
-        .then( (res: any) =>
+        Api.ListAdm( id ).then( (res: any) =>
         {
             this.setState(
             {
@@ -58,8 +57,7 @@ export class EditComponent extends Component< {}, State >
     {
         if( state.nome !== "" && state.slug !== "" )
         {
-            Api.EditAdm( state, this.state.id )
-            .then( (res: string) =>
+            Api.EditAdm( state, this.state.id ).then( (res: string) =>
             {
                 sessionStorage.setItem("msg", res);
              
@@ -69,8 +67,17 @@ export class EditComponent extends Component< {}, State >
         else this.setState({ pop: true });
     };
  
+    componentDidMount(): void
+    {
+        const id: string = window.location.search;
+     
+        this.ApiGet(window.location.search);
+    };
+ 
     render(): React.ReactElement<HTMLElement>
     {
+        console.log( this.props );
+     
         return (
             <>
                 <Navbar/>

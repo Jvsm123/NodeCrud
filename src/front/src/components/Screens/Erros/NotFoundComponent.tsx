@@ -15,7 +15,6 @@ export class NotFoundComponent extends Component< {}, {} >
                 {
                     height: "100vh",
                     backgroundColor: "#380000",
-                    width: "100%",
                     margin: '0px',
                 }}>
                 <Container sx={{height: "80vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>

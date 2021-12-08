@@ -10,6 +10,6 @@ export class AllPostsController
      
         const posts = await allPostsService.execute( req.query );
      
-        return res.json( posts );
+        return res.json({ data: posts });
     };
 };

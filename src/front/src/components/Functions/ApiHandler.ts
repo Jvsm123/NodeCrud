@@ -11,7 +11,7 @@ interface IDataEdit extends IDataSend
 
 export class Api
 {
-    static async ListAdm( id?: string ): Promise< Array< {} > >
+    static async ListAdm( id?: string ): Promise< any >
     {
         let url = "http://localhost:8080/admin/categorias";
      

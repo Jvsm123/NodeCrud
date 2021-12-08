@@ -19,7 +19,7 @@ export class Connection
             return await createConnection("Mysql");
         };
      
-        return await getConnection("MongoDB");
+        return await getConnection("Mysql");
     };
  
     private async SetMongoConnection(): Promise<any>

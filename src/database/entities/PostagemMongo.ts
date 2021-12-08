@@ -8,7 +8,7 @@ export class PostagemMongo
  
     @Column({ nullable: false })
     titulo: string;
-
+ 
     @Column({ nullable: true })
     slug: string;
  
