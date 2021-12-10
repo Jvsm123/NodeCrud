@@ -8,8 +8,8 @@ export class AllPostsController
     {
         const allPostsService = new AllPostsService();
      
-        const posts = await allPostsService.execute( req.query );
-     
-        return res.json({ data: posts });
+        const posts = await allPostsService.execute( req.query.id );
+
+        return res.json( posts );
     };
 };

@@ -2,6 +2,8 @@ import { Request } from 'express';
 
 import { getCustomRepository } from 'typeorm';
 
+import { ObjectId } from 'mongodb';
+
 import { PostagemMongoRepo } from '../repositories/PostagensRepositories';
 
 import { Connection } from '../database/Connection';
@@ -12,8 +14,6 @@ export class AllPostsService
     {
         let allPosts;
      
-        const { id } = ID;
-     
         const connection = new Connection();
      
         const mongoConn = await connection.GetConnection('mongo');
@@ -21,8 +21,8 @@ export class AllPostsService
         const postsMongoRepo = mongoConn
         .getCustomRepository( PostagemMongoRepo );
      
-        if( id )
-            allPosts = await postsMongoRepo.findOne( id );
+        if( ID )
+            allPosts = await postsMongoRepo.findOne({ _id: ObjectId(ID) });
         else
             allPosts = await postsMongoRepo.find();
      

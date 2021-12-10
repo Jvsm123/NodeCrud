@@ -3,12 +3,15 @@ import { Component } from 'react';
 import {
     Alert,
     Card,
+    CircularProgress,
     Container,
+    Backdrop,
     InputLabel,
     TextField,
     Button,
     Typography,
-    Snackbar
+    Snackbar,
+    Stack
 } from '@mui/material';
 
 import { Navigate } from 'react-router-dom';
@@ -19,47 +22,52 @@ import { Navbar } from '../../UI/Navbar/Navbar';
 
 interface State
 {
-    id: string | null
-    titulo: string | null;
-    nome: string | null;
-    slug: string | null;
+    newTitulo: Object | null;
+    newSlug: string | null;
+ 
+    id: null | string;
+    titulo: Object | undefined;
+    slug: string | undefined;
+ 
     redirectTo: string | null;
     pop: boolean;
+    openCircle: boolean;
 };
 
 export class EditComponent extends Component< {}, State >
 {
     state =
     {
+        newTitulo: null,
+        newSlug: null,
+     
         id: null,
-        titulo: null,
-        nome: null,
-        slug: null,
+        titulo: undefined,
+        slug: undefined,
+     
         redirectTo: null,
-        pop: false
+        pop: false,
+        openCircle: true
     };
  
     ApiGet( id: string ): void
     {
-        Api.ListAdm( id ).then( (res: any) =>
+        Api.ListAdm( id ).then( (res: any) => this.setState(
         {
-            this.setState(
-            {
-                id: res.id,
-                titulo: res.titulo,
-                nome: res.titulo,
-                slug: res.slug
-            });
-        });
+            id: res.id,
+            titulo: res.titulo,
+            slug: res.slug,
+            openCircle: false
+        }));
     };
  
     ApiSend( state: State ): void
     {
-        if( state.nome !== "" && state.slug !== "" )
+        if( state.newTitulo !== "" && state.newSlug !== "" )
         {
             Api.EditAdm( state, this.state.id ).then( (res: string) =>
             {
-                sessionStorage.setItem("msg", res);
+                sessionStorage.setItem( "msg", res );
              
                 this.setState({ redirectTo: "/admin/categorias" });
             });
@@ -69,19 +77,30 @@ export class EditComponent extends Component< {}, State >
  
     componentDidMount(): void
     {
-        const id: string = window.location.search;
+        const id: string = window.location.search.split('?id=')[1];
      
-        this.ApiGet(window.location.search);
+        this.ApiGet( id );
     };
  
-    render(): React.ReactElement<HTMLElement>
+    render(): React.ReactElement< HTMLElement >
     {
-        console.log( this.props );
+        if( !this.state.id && !this.state.titulo && !this.state.slug )
+            return <CircularProgress/>
+     
+        if( this.state.redirectTo )
+            return <Navigate to={this.state.redirectTo}/>
      
         return (
             <>
+                <Backdrop
+                    open={this.state.openCircle}
+                    sx={{color: "#fff", zIndex: 99}}
+                >
+                    <CircularProgress/>
+                </Backdrop>
+
                 <Navbar/>
-             
+                 
                 { this.state.pop &&
                     <Snackbar
                         open={this.state.pop}
@@ -94,7 +113,7 @@ export class EditComponent extends Component< {}, State >
                         </Alert>
                     </Snackbar>
                 }
-             
+                 
                 <Container sx={
                 {
                     display: 'flex',
@@ -105,17 +124,23 @@ export class EditComponent extends Component< {}, State >
                 }}
                 >
                     <Container>
-                        <Typography
-                            variant="h2"
-                            sx={
-                            {
-                                alignSelf: "flex-start",
-                                marginBottom:"15px",
-                                color: "#707070"
-                            }}
-                        >
-                            Editar {this.state.titulo}
-                        </Typography>
+                        <Stack direction="row" sx={{justifyContent: "spaceAround", alignItems: "center"}}>
+                            <Typography
+                                variant="h3"
+                                sx={
+                                {
+                                    alignSelf: "flex-start",
+                                    marginBottom:"15px",
+                                    color: "#707070"
+                                }}
+                            >
+                                Editar
+                            </Typography>
+                         
+                            <Typography color="primary" variant="h5">
+                                {this.state.titulo}
+                            </Typography>
+                        </Stack>
                      
                         <Card
                             variant="outlined"
@@ -129,23 +154,26 @@ export class EditComponent extends Component< {}, State >
                                 backgroundColor: "#EBFFEB"
                             }}
                         >
-                            <InputLabel sx={{fontSize: "25px"}}
-                            >
-                                Novo Titulo: {this.state.titulo}
+                            <InputLabel sx={{fontSize: "25px"}}>
+                                Novo Titulo:
                             </InputLabel>
+                         
                             <TextField
+                                placeholder={this.state.titulo}
                                 inputProps={{maxLength: 30}}
                                 type="text"
-                                onChange={(e) => this.setState({nome: e.target.value})}
+                                onChange={(e) => this.setState({newTitulo: e.target.value})}
                             />
                          
                             <InputLabel sx={{fontSize: "25px"}}>
-                                Novo Slug: {this.state.slug}
+                                Novo Slug:
                             </InputLabel>
+                         
                             <TextField
+                                placeholder={this.state.slug}
                                 inputProps={{maxLength: 30}}
                                 type="text"
-                                onChange={(e) => this.setState({slug: e.target.value})}
+                                onChange={(e) => this.setState({newSlug: e.target.value})}
                             />
                          
                             <Button

@@ -4,11 +4,6 @@ interface IDataSend
     slug: string;
 };
 
-interface IDataEdit extends IDataSend
-{
-    id: string;
-};
-
 export class Api
 {
     static async ListAdm( id?: string ): Promise< any >
@@ -66,8 +61,7 @@ export class Api
      
         const body = await response.json();
      
-        if( response.status !== 200 )
-            return "ERRR";
+        if( response.status !== 200 ) return "ERRR";
      
         return body;
     };
