@@ -1,68 +1,88 @@
 interface IDataSend
 {
-    nome: string;
-    slug: string;
+	titulo: string;
+	slug: string;
+};
+
+interface IDataEdit
+{
+	titulo: string;
+	newTitulo: string;
+	slug: string;
+	newSlug: string;
 };
 
 export class Api
 {
-    static async ListAdm( id?: string ): Promise< any >
-    {
-        let url = "http://localhost:8080/admin/categorias";
-     
-        if( id ) url += `?id=${id}`;
-     
-        const response = await fetch( url );
-     
-        const body = await response.json();
-     
-        if( response.status !== 200 ) throw new Error( body.message );
-     
-        return body;
-    };
+	static async ListAdm( id?: string ): Promise< any >
+	{
+		let url = "http://localhost:8080/admin/categorias";
+	 
+		if( id ) url += `?id=${id}`;
+	 
+		const response = await fetch( url );
+	 
+		if( response.status !== 200 ) throw new Error( "ERRO" );
+	 
+		const body = await response.json();
+	 
+		return body;
+	};
  
-    static async SendAdm( { nome, slug }: IDataSend ): Promise< string >
-    {
-        const response = await fetch (
-            "http://localhost:8080/admin/addPostagens",
-            {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify (
-                {
-                    nome: nome,
-                    slug: slug
-                })
-            }
-        );
-     
-        const body = await response.json();
-     
-        if( response.status !== 200 ) return "ERR";
-     
-        return body;
-    };
+	static async SendAdm( { titulo, slug }: IDataSend ): Promise< string >
+	{
+		const response = await fetch (
+			"http://localhost:8080/admin/addPostagens",
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify (
+				{
+					titulo: titulo,
+					slug: slug
+				})
+			}
+		);
+	 
+		if( response.status !== 200 ) return "ERR";
+	 
+		const body = await response.json();
+	 
+		return body;
+	};
  
-    static async EditAdm( state: any, id: any ): Promise< string >
-    {
-        const response = await fetch(
-            `http://localhost:8080/categorias/edit/${id}`,
-            {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(
-                {
-                    titulo: state.nome,
-                    slug: state.slug,
-                    id: id
-                })
-            }
-        );
-     
-        const body = await response.json();
-     
-        if( response.status !== 200 ) return "ERRR";
-     
-        return body;
-    };
+	static async EditAdm( state: IDataEdit, ID: string ): Promise< string >
+	{
+		const response = await fetch(
+			`http://localhost:8080/admin/categorias/edit/${ID}`,
+				{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(
+					{
+						titulo: state.titulo,
+						newTitulo: state.newTitulo,
+						slug: state.slug,
+						newSlug: state.newSlug,
+					})
+			}
+		);
+	 
+		if( response.status !== 200 ) return "ERRR";
+	 
+		const body = await response.json();
+	 
+		return body;
+	};
+ 
+	static async RemoveAdm( ID: string ): Promise< string >
+	{
+		const response = await fetch(`http://localhost:8080/admin/categorias/delete/${ID}`);
+	 
+		if( response.status !== 200 ) return "ERRR";
+	 
+		const body = await response.json();
+	 
+		return body;
+	};
 };

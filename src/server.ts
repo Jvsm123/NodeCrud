@@ -1,6 +1,7 @@
-import Express, { Request, Response } from 'express';
+import Express, { Request, Response, NextFunction } from 'express';
 
-import "reflect-metadata";
+import "reflect-metadata"; //Para uso do typeorm
+import "express-async-errors"; //Para uso de tratamento de erros no express;
 
 import { Admin } from './routes/Admin';
 import { Main } from './routes/Main';
@@ -21,13 +22,26 @@ const server = Express();
     }));
  
     //Configurações de conexão e host's
-    server.use( Express.urlencoded( { extended: true } ) );
+    server.use( Express.urlencoded({ extended: true }) );
     server.use( Express.json() );
     server.use( Cors() );
 
 //Rotas
     server.use( '/admin', Admin );
     server.use( '/', Main );
+	
+//Middleware de erro para todos
+	server.use( ( err: Error, req: Request, res: Response, next: NextFunction ) =>
+	{
+		if( err instanceof Error )
+			return res
+				.status( 500 )
+				.json(
+				{
+					status: "Error",
+					message: "Erro interno no servidor!"
+				});
+	});
 
 server.listen( "8080", () =>
     console.log("Servidor levantado: http://localhost:8080/" ) );

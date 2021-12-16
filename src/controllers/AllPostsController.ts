@@ -4,12 +4,12 @@ import { Request, Response } from 'express';
 
 export class AllPostsController
 {
-    async handler( req: Request, res: Response ): Promise< Response >
-    {
-        const allPostsService = new AllPostsService();
-     
-        const posts = await allPostsService.execute( req.query.id );
-
-        return res.json( posts );
-    };
+	async handler( req: Request, res: Response ): Promise< Response >
+	{
+		const allPostsService = new AllPostsService();
+	 
+		const posts = await allPostsService.execute( req.query.id );
+	 
+		return res.json( posts );
+	};
 };

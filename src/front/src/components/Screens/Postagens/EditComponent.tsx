@@ -22,12 +22,12 @@ import { Navbar } from '../../UI/Navbar/Navbar';
 
 interface State
 {
-    newTitulo: Object | null;
-    newSlug: string | null;
+    newTitulo: string;
+    newSlug: string;
  
-    id: null | string;
-    titulo: Object | undefined;
-    slug: string | undefined;
+    id: string;
+    titulo: string;
+    slug: string;
  
     redirectTo: string | null;
     pop: boolean;
@@ -38,19 +38,19 @@ export class EditComponent extends Component< {}, State >
 {
     state =
     {
-        newTitulo: null,
-        newSlug: null,
+        newTitulo: "",
+        newSlug: "",
      
-        id: null,
-        titulo: undefined,
-        slug: undefined,
+        id: "",
+        titulo: "",
+        slug: "",
      
         redirectTo: null,
         pop: false,
         openCircle: true
     };
  
-    ApiGet( id: string ): void
+    ApiList( id: string ): void
     {
         Api.ListAdm( id ).then( (res: any) => this.setState(
         {
@@ -61,7 +61,7 @@ export class EditComponent extends Component< {}, State >
         }));
     };
  
-    ApiSend( state: State ): void
+    ApiEdit( state: State ): void
     {
         if( state.newTitulo !== "" && state.newSlug !== "" )
         {
@@ -79,7 +79,7 @@ export class EditComponent extends Component< {}, State >
     {
         const id: string = window.location.search.split('?id=')[1];
      
-        this.ApiGet( id );
+        this.ApiList( id );
     };
  
     render(): React.ReactElement< HTMLElement >
@@ -124,7 +124,7 @@ export class EditComponent extends Component< {}, State >
                 }}
                 >
                     <Container>
-                        <Stack direction="row" sx={{justifyContent: "spaceAround", alignItems: "center"}}>
+                        <Stack direction="row" sx={{justifyContent: "space-Between", alignItems: "center"}}>
                             <Typography
                                 variant="h3"
                                 sx={
@@ -180,7 +180,7 @@ export class EditComponent extends Component< {}, State >
                                 variant='contained'
                                 color="info"
                                 sx={{marginTop: '25px'}}
-                                onClick={() => this.ApiSend(this.state)}
+                                onClick={() => this.ApiEdit(this.state)}
                             >
                                 Alterar
                             </Button>

@@ -19,7 +19,7 @@ import { Api } from '../../Functions/ApiHandler';
 
 interface State
 {
-    nome: string;
+    titulo: string;
     slug: string;
     msg: string | number;
     redirectTo: null | string;
@@ -30,7 +30,7 @@ export class AddComponent extends Component< {}, State >
 {
     state =
     {
-        nome: "",
+        titulo: "",
         slug: "",
         redirectTo: null,
         msg: "",
@@ -39,11 +39,11 @@ export class AddComponent extends Component< {}, State >
  
     Api( state: State ): void
     {
-        if( state.nome !== "" && state.slug !== "" )
+        if( state.titulo !== "" && state.slug !== "" )
         {
-            const { nome, slug } = state;
+            const { titulo, slug } = state;
          
-            Api.SendAdm({ nome: nome, slug: slug })
+            Api.SendAdm({ titulo: titulo, slug: slug })
             .then( ( res: string ) =>
             {
                 sessionStorage.setItem("msg", res );
@@ -108,12 +108,12 @@ export class AddComponent extends Component< {}, State >
                             borderColor: "#DCFFDB",
                             backgroundColor: "#EBFFEB"
                         }}>
-                            <InputLabel sx={{fontSize: "25px"}}>Nome:</InputLabel>
+                            <InputLabel sx={{fontSize: "25px"}}>Título:</InputLabel>
                             <TextField
                                 type="text"
                                 inputProps={{maxLength: 30}}
                                 sx={{marginBottom: "15px"}}
-                                onChange={(e) => this.setState({nome: e.target.value})}
+                                onChange={(e) => this.setState({titulo: e.target.value})}
                             />
 
                             <InputLabel sx={{fontSize: "25px"}}>Slug:</InputLabel>
