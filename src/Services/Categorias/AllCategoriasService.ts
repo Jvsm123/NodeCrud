@@ -4,19 +4,19 @@ import { ObjectId } from 'mongodb';
 
 import { CategoriasMongoRepo } from '../../Repositories/CategoriasRepositories';
 
-import { Connection } from '../../Database/Connection';
+import { Connections } from '../../Database/Connection';
 
 import { ParsedQs } from 'qs';
 
 export class AllCategoriasService
 {
-	async execute( ID?: string | string[] | ParsedQs | ParsedQs[] ): Promise< any[] | undefined >
+	async execute( ID?: string | string[] | ParsedQs | ParsedQs[] ): Promise< [] | undefined >
 	{
 		try
 		{
-			let allPosts;
-		 
-			const instaceConnection = new Connection();
+			let allPosts: any[any];
+
+			const instaceConnection = new Connections();
 		 
 			const mongoConnection = await instaceConnection
 			.GetConnection('mongo');
@@ -26,7 +26,7 @@ export class AllCategoriasService
 		 
 			if( ID )
 				allPosts = await categoriasMongoRepo
-				.findOne({ _id: ObjectId(ID) });
+				.findOne({ id: ObjectId(ID) });
 			else
 				allPosts = await categoriasMongoRepo
 				.find();

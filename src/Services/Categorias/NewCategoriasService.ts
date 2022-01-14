@@ -2,21 +2,17 @@ import { getCustomRepository } from 'typeorm';
 
 import { CategoriasMongoRepo } from '../../Repositories/CategoriasRepositories';
 
-import { Connection } from '../../Database/Connection';
+import { Connections } from '../../Database/Connection';
 
-interface IData
-{
-    titulo: string;
-    slug: string;
-};
+import { INewData } from '../../Interfaces/Main';
 
 export class NewCategoriasService
 {
-	async execute( Data: IData ): Promise< string | undefined >
+	async execute( Data: INewData ): Promise< string | undefined >
 	{
 		try
 		{
-			const instanceConnection = new Connection();
+			const instanceConnection = new Connections();
 		 
 			const mongoConnection = await instanceConnection
 			.GetConnection('mongo');

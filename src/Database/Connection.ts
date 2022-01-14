@@ -1,16 +1,17 @@
-import { createConnection, getConnection } from 'typeorm';
+import { createConnection, getConnection, Connection } from 'typeorm';
 
 var status = false;
 
-export class Connection
+export class Connections
 {
-	public async GetConnection( db: string ): Promise< any | boolean >
+	public async GetConnection( db: string ): Promise< Connection >
 	{
 		if( db === 'mongo' ) return await this.SetMongoConnection();
-		if( db === 'mysql' ) return await this.SetMongoConnection();
+
+		else return await this.SetMysqlConnection();
 	};
  
-	private async SetMysqlConnection(): Promise< any >
+	private async SetMysqlConnection(): Promise< Connection >
 	{
 		try
 		{
@@ -21,12 +22,12 @@ export class Connection
 				return await createConnection("Mysql");
 			};
 		 
-			return await getConnection("Mysql");
+			return getConnection("Mysql");
 		}
 		catch( err ) { throw new Error(`Erro ao se conectar: ${err}`) };
 	};
  
-	private async SetMongoConnection(): Promise< any >
+	private async SetMongoConnection(): Promise< Connection >
 	{
 		try
 		{
@@ -37,7 +38,7 @@ export class Connection
 				return await createConnection("MongoDB");
 			};
 		 
-			return await getConnection("MongoDB");
+			return getConnection("MongoDB");
 		}
 		catch( err ) { throw new Error(`Erro ao se conectar: ${err}`) };
 	};

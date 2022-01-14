@@ -1,10 +1,10 @@
 import { getCustomRepository } from 'typeorm';
 
-import { ObjectId, Request } from 'mongodb';
+import { ObjectId } from 'mongodb';
 
 import { CategoriasMongoRepo } from '../../Repositories/CategoriasRepositories';
 
-import { Connection } from '../../Database/Connection';
+import { Connections } from '../../Database/Connection';
 
 export class DeleteCategoriasService
 {
@@ -12,12 +12,12 @@ export class DeleteCategoriasService
 	{
 		try
 		{
-			const instanceConnection = new Connection();
+			const instanceConnection = new Connections();
 		 
 			const mongoConnection = await instanceConnection
 			.GetConnection( 'mongo' );
 		 
-			const categoriasMongoRepo = await mongoConnection
+			const categoriasMongoRepo = mongoConnection
 			.getCustomRepository( CategoriasMongoRepo );
 		 
 			const result = await categoriasMongoRepo
