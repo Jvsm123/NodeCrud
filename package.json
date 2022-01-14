@@ -4,7 +4,7 @@
 	"description": "Um projeto de CRUD com Nodejs e React",
 	"main": "server.js",
 	"scripts": {
-		"back": "ts-node-dev src/Server",
+		"back": "cd ./src/Back && ts-node-dev Server",
 		"front": "cd ./src/Front && yarn start",
 		"ormcli": "ts-node-dev ./node_modules/typeorm/cli.js",
 		"dev": "concurrently --kill-others-on-fail \"yarn run tsnode\" \"yarn run front\" ",
