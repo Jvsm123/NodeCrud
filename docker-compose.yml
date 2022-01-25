@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+
+  web:
+    container_name: "node_crudApp"
+    build: .
+    command: "npm run back"
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./:/nodeCrud
+    links:
+      - back
+    environment:
+        DATABASE_URL: mysql2://nodecrud:crud1234@database:3306/nodeCrud/
+
+  back:
+    container_name: "mysql_crudApp"
+    image: "mysql"
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: "nodeCrud"
+      MYSQL_USER: "nodecrud"
+      MYSQL_ROOT_PASSWORD: "crud1234"
+
+volumes:
+  dbdata: {}

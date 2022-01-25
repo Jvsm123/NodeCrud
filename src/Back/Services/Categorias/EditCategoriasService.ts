@@ -1,42 +1,30 @@
 import { getCustomRepository } from 'typeorm';
 
-import { ObjectId } from 'mongodb';
-
-import { CategoriasMongoRepo } from '../../Repositories/CategoriasRepositories';
-
-import { Connections } from '../../Database/Connection';
+import { CategoriasRepo } from '../../Repositories/CategoriasRepositories';
 
 import { IEditData } from '../../Interfaces/Main';
 
 export class EditCategoriasService
 {
-	async execute( data: IEditData, ID: string ): Promise< string | undefined >
+	async execute( data: IEditData, ID: string ): Promise< string >
 	{
 		try
 		{
-			const instanceConnection = new Connections();
+			const categoriasRepo = getCustomRepository( CategoriasRepo );
 		 
-			const mongoConnection = await instanceConnection
-			.GetConnection('mongo');
+			let newCategoria = await categoriasRepo.findOne({ where: { id: ID } });
+
+			if( !newCategoria ) throw new Error("Erro, não há categorias com essa ID!");
 		 
-			const categoriasMongoRepo = mongoConnection
-			.getCustomRepository( CategoriasMongoRepo );
+			newCategoria.titulo = (data.titulo === data.newTitulo)
+				? data.titulo : data.newTitulo;
 		 
-			let newCategoria = await categoriasMongoRepo
-			.findOne({ id: ObjectId(ID) });
+			newCategoria.slug = (data.slug === data.newSlug)
+				? data.slug : data.newSlug;
 		 
-			if( newCategoria )
-			{
-				newCategoria.titulo = (data.titulo === data.newTitulo)
-					? data.titulo : data.newTitulo;
-		 
-				newCategoria.slug = (data.slug === data.newSlug)
-					? data.slug : data.newSlug;
-		 
-				return await categoriasMongoRepo
-					.update( ID, newCategoria )
-					.then( () => { return "alterado com sucesso!" } );
-			};
+			await categoriasRepo.update( ID, newCategoria )
+
+			return "Categoria criada com sucesso!";
 		}
 		catch( err ) { throw new Error( `Erro ao editar: ${err}` ) };
 	};

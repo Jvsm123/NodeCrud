@@ -1,10 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 
-import { ObjectId } from 'mongodb';
-
-import { CategoriasMongoRepo } from '../../Repositories/CategoriasRepositories';
-
-import { Connections } from '../../Database/Connection';
+import { CategoriasRepo } from '../../Repositories/CategoriasRepositories';
 
 export class DeleteCategoriasService
 {
@@ -12,16 +8,9 @@ export class DeleteCategoriasService
 	{
 		try
 		{
-			const instanceConnection = new Connections();
+			const categoriasRepo = getCustomRepository( CategoriasRepo );
 		 
-			const mongoConnection = await instanceConnection
-			.GetConnection( 'mongo' );
-		 
-			const categoriasMongoRepo = mongoConnection
-			.getCustomRepository( CategoriasMongoRepo );
-		 
-			const result = await categoriasMongoRepo
-			.delete( ID );
+			const result = await categoriasRepo.delete( ID );
 		 
 			if( !result ) throw new Error( "Erro ao deletar!" );
 		 

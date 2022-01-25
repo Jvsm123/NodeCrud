@@ -1,28 +1,21 @@
 import { getCustomRepository } from 'typeorm';
 
-import { CategoriasMongoRepo } from '../../Repositories/CategoriasRepositories';
-
-import { Connections } from '../../Database/Connection';
+import { CategoriasRepo } from '../../Repositories/CategoriasRepositories';
 
 import { INewData } from '../../Interfaces/Main';
 
 export class NewCategoriasService
 {
-	async execute( Data: INewData ): Promise< string | undefined >
+	async execute( Data: INewData ): Promise< INewData >
 	{
 		try
 		{
-			const instanceConnection = new Connections();
+			const categoriasRepo = getCustomRepository( CategoriasRepo );
 		 
-			const mongoConnection = await instanceConnection
-			.GetConnection('mongo');
-		 
-			const categoriasMongoRepo = mongoConnection
-			.getCustomRepository( CategoriasMongoRepo );
-		 
-			return await categoriasMongoRepo
+			await categoriasRepo
 			.save({ titulo: Data.titulo, slug: Data.slug })
-			.then( () => { return "Sucesso ao Salvar!" } );
+
+			return Data;
 		}
 		catch( err ) { throw new Error( `Erro ao adicionar: ${err}` ) };
 	};

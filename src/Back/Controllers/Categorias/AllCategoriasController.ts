@@ -8,10 +8,7 @@ export class AllCategoriasController
 	{
 		const allCategoriasService = new AllCategoriasService();
 
-		const querys = req.query.id;
-	 
-		const allPosts = await allCategoriasService
-		.execute( querys && querys );
+		const allPosts = await allCategoriasService.execute();
 	 
 		return res.json( allPosts );
 	};

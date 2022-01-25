@@ -12,7 +12,7 @@ const newCategoriasController = new NewCategoriasController();
 const editCategoriasController = new EditCategoriasController();
 const deleteCategoriasController = new DeleteCategoriasController();
 
-Admin.get('/categorias', allCategoriasController.handler);
+Admin.get('/categorias/all', allCategoriasController.handler);
 Admin.post('/categorias/add', newCategoriasController.handler);
 Admin.put('/categorias/edit/:id', editCategoriasController.handler);
 Admin.delete('/categorias/remove/:id', deleteCategoriasController.handler);
