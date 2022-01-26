@@ -11,3 +11,12 @@ export interface INewData
 	titulo: string;
 	slug: string;
 };
+
+export interface INewPostagemData
+{
+	titulo: string;
+	slug: string;
+	descricao?: string;
+	conteudo?: string;
+	categoria: string;
+}

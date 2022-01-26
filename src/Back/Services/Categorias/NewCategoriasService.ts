@@ -6,17 +6,16 @@ import { INewData } from '../../Interfaces/Main';
 
 export class NewCategoriasService
 {
-	async execute( Data: INewData ): Promise< INewData >
+	async execute( Data: INewData ): Promise< string >
 	{
 		try
 		{
 			const categoriasRepo = getCustomRepository( CategoriasRepo );
 		 
-			await categoriasRepo
-			.save({ titulo: Data.titulo, slug: Data.slug })
+			await categoriasRepo.save( Data );
 
-			return Data;
+			return "Categoria criada com sucesso!";
 		}
-		catch( err ) { throw new Error( `Erro ao adicionar: ${err}` ) };
+		catch( err ) { throw new Error(`Erro ao adicionar: ${err}`) };
 	};
 };

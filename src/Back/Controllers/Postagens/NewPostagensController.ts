@@ -1,9 +1,19 @@
 import { Request, Response } from 'express';
 
+import { NewPostagensService } from '../../Services/Postagens/NewPostagensService';
+
 export class NewPostagensController
 {
 	async handler( req: Request, res: Response ): Promise< Response >
 	{
-		return res.json( "nova postagem!" );
+		const newPostagensService = new NewPostagensService();
+
+		const body = req.body;
+		if ( !body || !body.nome || !body.slug || !body.categorias )
+			throw new Error("Faltam dados!!!");
+
+		const result = await newPostagensService.execute( req.body )
+
+		return res.json( result );
 	};
 };
