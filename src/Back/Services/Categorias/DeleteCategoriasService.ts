@@ -9,11 +9,11 @@ export class DeleteCategoriasService
 		try
 		{
 			const categoriasRepo = getCustomRepository( CategoriasRepo );
-		 
+
 			const result = await categoriasRepo.delete( ID );
-		 
-			if( !result ) throw new Error( "Erro ao deletar!" );
-		 
+
+			if( !result ) return("Essa categoria não existe!");
+
 			return "Deletado com sucesso!";
 		}
 		catch( err: any )

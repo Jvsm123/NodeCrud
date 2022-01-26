@@ -1,8 +1,8 @@
 import { getCustomRepository } from 'typeorm';
 
-import { CategoriasRepo } from '../../Repositories/CategoriasRepositories';
-
 import { IEditData } from '../../Interfaces/Main';
+
+import { CategoriasRepo } from '../../Repositories/CategoriasRepositories';
 
 export class EditCategoriasService
 {
@@ -20,7 +20,7 @@ export class EditCategoriasService
 		 
 				data.slug && (categoria.slug = data.slug);
 			}
-			else return "categoria não econtrada!";
+			else return "categoria não encontrada!";
 		 
 			await categoriasRepo.update( ID, categoria );
 

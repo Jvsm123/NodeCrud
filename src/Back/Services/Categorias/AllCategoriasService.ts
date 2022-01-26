@@ -1,17 +1,19 @@
 import { getCustomRepository } from 'typeorm';
 
+import { Categorias } from '../../Database/Entities/Categorias'
+
 import { CategoriasRepo } from '../../Repositories/CategoriasRepositories';
 
 export class AllCategoriasService
 {
-	async execute(): Promise< [] >
+	async execute(): Promise< Categorias[] >
 	{
-		let allPosts: any[any];
+		let allCategorias: Categorias[];
 
-		const categoriasMysqlRepo = getCustomRepository( CategoriasRepo );
+		const categoriasRepo = getCustomRepository( CategoriasRepo );
 
-		allPosts = await categoriasMysqlRepo.find();
+		allCategorias = await categoriasRepo.find();
 
-		return allPosts;
+		return allCategorias;
 	};
 };
