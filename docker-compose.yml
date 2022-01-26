@@ -15,7 +15,7 @@ services:
     links:
       - back
     environment:
-        DATABASE_URL: mysql2://nodecrud:crud1234@database:3306/nodeCrud/
+        DATABASE_URL: mysqlx://root:crud1234@back:3306/nodeCrud
 
   back:
     container_name: "mysql_crudApp"
@@ -26,9 +26,10 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
     environment:
+      MYSQL_ROOT_PASSWORD: "crud1234"
       MYSQL_DATABASE: "nodeCrud"
       MYSQL_USER: "nodecrud"
-      MYSQL_ROOT_PASSWORD: "crud1234"
+      MYSQL_PASSWORD: "crud1234"
 
 volumes:
   dbdata: {}

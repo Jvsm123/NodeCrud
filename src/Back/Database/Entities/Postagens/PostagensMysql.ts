@@ -8,7 +8,7 @@ import {
 	UpdateDateColumn
 } from 'typeorm';
 
-import { CategoriasMysql } from '../Categorias/CategoriasMysql.ts'
+import { CategoriasMysql } from '../Categorias/CategoriasMysql';
 
 @Entity()
 export class PostagensMysql
@@ -16,16 +16,16 @@ export class PostagensMysql
 	@PrimaryGeneratedColumn()
 	id: number;
  
-	@Column({ nullable false, type: 'text' })
+	@Column()
 	titulo: string;
  
-	@Column({ nullable: false, type: 'text' })
+	@Column()
 	slug: string;
  
-	@Column({ nullable: false, type: 'text '})
+	@Column()
 	descricao: string;
  
-	@Column({ nullable: false, type: 'text' })
+	@Column()
 	conteudo: string;
  
 	@CreateDateColumn()
@@ -34,10 +34,10 @@ export class PostagensMysql
 	@UpdateDateColumn()
 	updated_at: Date;
  
-	@Column({ nullable: false, type: 'text' })
+	@Column()
 	id_categoria: string;
  
-	@JoinColumn({ name: 'id_categoria' })
+	@JoinColumn()
 	@ManyToOne( () => CategoriasMysql )
 	categoria: CategoriasMysql;
 };
