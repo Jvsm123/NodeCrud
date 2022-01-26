@@ -1,6 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
 
-import { CategoriasMysql } from '../Database/Entities/Categorias/CategoriasMysql';
+import { Categorias } from '../Database/Entities/Categorias';
 
-@EntityRepository( CategoriasMysql )
-export class CategoriasRepo extends Repository< CategoriasMysql > { };
+@EntityRepository( Categorias )
+export class CategoriasRepo extends Repository< Categorias > { };

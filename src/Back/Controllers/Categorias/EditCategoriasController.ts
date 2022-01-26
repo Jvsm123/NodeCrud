@@ -7,10 +7,12 @@ export class EditCategoriasController
 	async handler( req: Request, res: Response ): Promise< Response >
 	{
 		const editCategoriasService = new EditCategoriasService();
+
+		if( !req.body || !req.params.id ) throw new Error("Faltam dados!");
 	 
-		const resMessage = await editCategoriasService
+		const result = await editCategoriasService
 		.execute( req.body, req.params.id );
 	 
-		return res.json( resMessage );
+		return res.json( result );
 	};
 };

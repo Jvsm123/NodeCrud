@@ -12,19 +12,19 @@ export class EditCategoriasService
 		{
 			const categoriasRepo = getCustomRepository( CategoriasRepo );
 		 
-			let newCategoria = await categoriasRepo.findOne({ where: { id: ID } });
+			let categoria = await categoriasRepo.findOne({ where: { id: ID } });
 
-			if( !newCategoria ) throw new Error("Erro, não há categorias com essa ID!");
+			if( categoria )
+			{
+				data.titulo && (categoria.titulo = data.titulo);
 		 
-			newCategoria.titulo = (data.titulo === data.newTitulo)
-				? data.titulo : data.newTitulo;
+				data.slug && (categoria.slug = data.slug);
+			}
+			else return "categoria não econtrada!";
 		 
-			newCategoria.slug = (data.slug === data.newSlug)
-				? data.slug : data.newSlug;
-		 
-			await categoriasRepo.update( ID, newCategoria )
+			await categoriasRepo.update( ID, categoria );
 
-			return "Categoria criada com sucesso!";
+			return "Categoria editada com sucesso!";
 		}
 		catch( err ) { throw new Error( `Erro ao editar: ${err}` ) };
 	};

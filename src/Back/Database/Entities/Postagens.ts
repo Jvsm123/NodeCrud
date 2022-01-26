@@ -2,16 +2,15 @@ import {
 	Entity,
 	Column,
 	ManyToOne,
-	JoinColumn,
 	PrimaryGeneratedColumn,
 	CreateDateColumn,
 	UpdateDateColumn
 } from 'typeorm';
 
-import { CategoriasMysql } from '../Categorias/CategoriasMysql';
+import { Categorias } from './Categorias';
 
 @Entity()
-export class PostagensMysql
+export class Postagens
 {
 	@PrimaryGeneratedColumn()
 	id: number;
@@ -34,10 +33,6 @@ export class PostagensMysql
 	@UpdateDateColumn()
 	updated_at: Date;
  
-	@Column()
-	id_categoria: string;
- 
-	@JoinColumn()
-	@ManyToOne( () => CategoriasMysql )
-	categoria: CategoriasMysql;
+	@ManyToOne( () => Categorias, category => category.postagens )
+	categoria: Categorias;
 };
