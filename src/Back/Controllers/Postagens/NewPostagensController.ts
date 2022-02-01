@@ -9,7 +9,8 @@ export class NewPostagensController
 		const newPostagensService = new NewPostagensService();
 
 		const body = req.body;
-		if ( !body || !body.nome || !body.slug || !body.categorias )
+
+		if( !body || !body.titulo || !body.slug )
 			throw new Error("Faltam dados!!!");
 
 		const result = await newPostagensService.execute( req.body )

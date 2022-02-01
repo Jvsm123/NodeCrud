@@ -45,14 +45,9 @@ Server.use( '/admin', Admin.filter( i => i ) );
 Server.use( ( err: Error, req: Request, res: Response, next: NextFunction ) =>
 {
 	if( err instanceof Error )
-		return res
-		.status( 500 )
-		.json(
-		{
-			status: "Error",
-			message: "Erro interno no servidor!"
-		});
+		return res.status( 500 )
+		.json({ status: "Error", message: "" + err });
 });
 
 Server.listen( "8080", () =>
-	console.log("Servidor levantado: http://localhost:8080/" ) );
+	console.log("Servidor levantado: http://localhost:8080/") );

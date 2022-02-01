@@ -21,11 +21,11 @@ export class Postagens
 	@Column()
 	slug: string;
  
-	@Column()
+	@Column({ nullable: true, type: "text" })
 	descricao: string;
  
-	@Column()
-	conteudo: string;
+	@Column({ nullable: true, type: "blob" })
+	conteudo?: string | any[any];
  
 	@CreateDateColumn()
 	created_at: Date;

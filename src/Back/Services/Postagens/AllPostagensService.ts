@@ -14,6 +14,6 @@ export class AllPostagensService
 
 		allPosts = await postagensRepo.find();
 
-		return allPosts
+		return allPosts;
 	};
 };
