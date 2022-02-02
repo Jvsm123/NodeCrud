@@ -19,6 +19,15 @@ export interface INewPostagemData
 	titulo: string;
 	slug: string;
 	descricao?: string;
-	conteudo?: string;
+	conteudo?: string | any[any];
 	categoria?: Categorias;
-}
+};
+
+export interface IEditPostagemData
+{
+	titulo: string,
+	slug: string,
+	descricao?: string,
+	conteudo?: string | any[any],
+	categoria?: Categorias
+};

@@ -1,10 +1,12 @@
 import { getCustomRepository } from 'typeorm';
 
+import { IEditPostagemData } from '../../Interfaces/Main';
+
 import { PostagensRepo } from '../../Repositories/PostsRepositories';
 
 export class EditPostagensService
 {
-	async execute( data: IEditData, ID: string ): Promise< string >
+	async execute( data: IEditPostagemData, ID: string ): Promise< string >
 	{
 		try
 		{
