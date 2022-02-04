@@ -4,6 +4,9 @@
 
 node_modules/
 
+yarn-error*
+yarn-debug*
+
 ## REACT
 # dependencies
 src/front/node_modules/

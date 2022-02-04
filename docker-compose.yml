@@ -2,23 +2,32 @@ version: '3'
 
 services:
 
-  web:
-    container_name: "node_crudApp"
-    build: .
-    command: "npm run back"
+  frontend:
+    container_name: "front"
+    build:
+      context: ./src/Front
+      dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "3000:3000"
+    volumes:
+      - ./front:/src/
+
+  backend:
+    container_name: "back"
+    build:
+      context: ./src/Back
+      dockerfile: Dockerfile
     env_file:
       - .env
-    volumes:
-      - ./:/nodeCrud
     links:
-      - back
+      - database
     environment:
         DATABASE_URL: mysqlx://root:crud1234@back:3306/nodeCrud
+    volumes:
+      - ./back:/src/
 
-  back:
-    container_name: "mysql_crudApp"
+  database:
+    container_name: "data_crudApp"
     image: "mysql"
     command: --default-authentication-plugin=mysql_native_password
     ports:

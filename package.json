@@ -3,16 +3,19 @@
 	"version": "1.0.0",
 	"description": "Um projeto de CRUD com Nodejs e React",
 	"main": "server.js",
-	"scripts": {
-		"back": "tsnd src/Back/Server.ts",
+	"scripts":
+	{
+		"back": "cd src/Back && tsnd Server.ts",
 		"front": "cd src/Front && yarn start",
+		"app": "concurrently 'yarn run back' 'yarn run front'",
 		"ormcli": "ts-node-dev ./node_modules/typeorm/cli.js",
 		"build": "",
 		"test": ""
 	},
 	"author": "Jvsm123",
 	"license": "ISC",
-	"dependencies": {
+	"dependencies":
+	{
 		"cors": "^2.8.5",
 		"dotenv": "^14.3.0",
 		"express": "^4.17.1",
@@ -23,7 +26,8 @@
 		"reflect-metadata": "^0.1.13",
 		"typeorm": "^0.2.41"
 	},
-	"devDependencies": {
+	"devDependencies":
+	{
 		"@types/express": "^4.17.13",
 		"@types/node": "^16.11.10",
 		"concurrently": "^6.4.0",
