@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, ReactElement } from 'react';
 
 import {
 	Alert,
@@ -83,7 +83,7 @@ export class ListComponent extends Component< {}, State >
 		this.setState({ data: data, openCircle: false });
 	};
  
-	render(): React.ReactElement<HTMLElement>
+	render(): ReactElement<HTMLElement>
 	{
 		if( this.state.redirectTo )
 			return <Navigate to={this.state.redirectTo}/>

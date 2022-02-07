@@ -9,6 +9,7 @@
 		"front": "cd src/Front && yarn start",
 		"app": "concurrently 'yarn run back' 'yarn run front'",
 		"ormcli": "ts-node-dev ./node_modules/typeorm/cli.js",
+		"back-docker": "tsnd Server.ts",
 		"build": "",
 		"test": ""
 	},

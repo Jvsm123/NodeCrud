@@ -1,19 +1,17 @@
 FROM node:16.13-alpine
 
-RUN mkdir /back
+WORKDIR /app
 
-WORKDIR /back
+COPY package.json ./
 
-COPY package.json /back
+COPY tsconfig.json ./
 
-COPY tsconfig.json /back
+COPY .env ./
 
-COPY .env /back
+COPY . ./
 
-RUN mkdir src
-
-COPY src/Back /back/src/
+RUN yarn install
 
 EXPOSE 8080
 
-CMD ["yarn", "run", "back"]
+CMD ["yarn", "run", "back-docker"]

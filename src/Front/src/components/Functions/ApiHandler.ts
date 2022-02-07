@@ -16,7 +16,7 @@ export class Api
 {
 	static async ListAdm( id?: string ): Promise< any >
 	{
-		let url = "http://localhost:8080/admin/categorias";
+		let url = "http://localhost:8080/admin/categorias/all";
 	 
 		if( id ) url += `?id=${id}`;
 	 

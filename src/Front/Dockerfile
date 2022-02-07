@@ -1,8 +1,12 @@
 FROM node:16.13-alpine
 
-RUN mkdir /front
+WORKDIR /app
 
-WORKDIR /front
+COPY package.json ./
+
+COPY . ./
+
+RUN yarn install --network-timeout 1000000
 
 EXPOSE 3000
 
