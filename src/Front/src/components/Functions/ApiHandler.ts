@@ -16,7 +16,7 @@ export class Api
 {
 	static async ListAdm( id?: string ): Promise< any >
 	{
-		let url = "http://localhost:8080/admin/categorias/all";
+		let url = "http://localhost:80/backend/admin/categorias/all";
 	 
 		if( id ) url += `?id=${id}`;
 	 
@@ -32,7 +32,7 @@ export class Api
 	static async SendAdm( { titulo, slug }: IDataSend ): Promise< string >
 	{
 		const response = await fetch (
-			"http://localhost:8080/admin/categorias/add",
+			"/backend/admin/categorias/add",
 			{
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
@@ -54,7 +54,7 @@ export class Api
 	static async EditAdm( state: IDataEdit, ID: string ): Promise< string >
 	{
 		const response = await fetch(
-			`http://localhost:8080/admin/categorias/edit/${ID}`,
+			`/backend/admin/categorias/edit/${ID}`,
 			{
 				method: "PUT",
 				headers: { "Content-Type": "application/json" },
@@ -78,7 +78,7 @@ export class Api
 	static async RemoveAdm( ID: string ): Promise< string >
 	{
 		const response = await fetch (
-			`http://localhost:8080/admin/categorias/remove/${ID}`,
+			`/backend/admin/categorias/remove/${ID}`,
 			{ method: "DELETE" }
 		);
 	 

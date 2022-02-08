@@ -5,7 +5,7 @@
 	"main": "server.js",
 	"scripts":
 	{
-		"back": "cd src/Back && tsnd Server.ts",
+		"back": "cd src/Back && tsnd --watch Server.ts",
 		"front": "cd src/Front && yarn start",
 		"app": "concurrently 'yarn run back' 'yarn run front'",
 		"ormcli": "ts-node-dev ./node_modules/typeorm/cli.js",

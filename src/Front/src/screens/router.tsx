@@ -17,24 +17,24 @@ import { NotFound } from './erros/NotFound';
 
 export class Router extends Component< {}, {} >
 {
-    render()
-    {
-        return (
-            <BrowserRouter>
-             
-                <Routes>
-                 
-                    <Route path="/admin">
-                        <Route path="categorias" element={ <IndexPostagens/> } />
-                        <Route path="addPostagens" element={ <AddPostagens/> } />
-                        <Route path="editPostagens" element={ <EditPostagens/> } />
-                    </Route>
-                 
-                    <Route path="*" element={ <NotFound/> }/>
-                 
-                </Routes>
-             
-            </BrowserRouter>
-        );
-    };
+	render()
+	{
+		return (
+			<BrowserRouter>
+
+				<Routes>
+
+					<Route path="/admin">
+						<Route path="categorias" element={ <IndexPostagens/> } />
+						<Route path="addPostagens" element={ <AddPostagens/> } />
+						<Route path="editPostagens" element={ <EditPostagens/> } />
+					</Route>
+
+					<Route path="*" element={ <NotFound/> }/>
+
+				</Routes>
+
+			</BrowserRouter>
+		);
+	};
 };

@@ -2,7 +2,6 @@
 	"name": "front",
 	"version": "0.1.0",
 	"private": true,
-	"proxy": "http://backend:8080/",
 	"dependencies":
 	{
 		"@mui/icons-material": "^5.2.0",

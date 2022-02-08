@@ -49,5 +49,4 @@ Server.use( ( err: Error, req: Request, res: Response, next: NextFunction ) =>
 		.json({ status: "Error", message: "" + err });
 });
 
-Server.listen( "8080", () =>
-	console.log("Servidor levantado: http://localhost:8080/") );
+Server.listen( "8080", () => console.log(">>>> LISTENING <<<<") );

@@ -1,6 +1,8 @@
 FROM node:16.13-alpine
 
-WORKDIR /app
+RUN mkdir /back
+
+WORKDIR /back
 
 COPY package.json ./
 
@@ -12,6 +14,6 @@ COPY . ./
 
 RUN yarn install
 
-EXPOSE 8080
+# EXPOSE 8080
 
 CMD ["yarn", "run", "back-docker"]
