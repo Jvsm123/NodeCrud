@@ -1,8 +1,6 @@
 FROM node:16.13-alpine
 
-RUN mkdir /back
-
-WORKDIR /back
+WORKDIR /var/app/back
 
 COPY package.json ./
 

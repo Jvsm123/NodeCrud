@@ -1,8 +1,6 @@
 FROM node:16.13-alpine
 
-RUN mkdir /front
-
-WORKDIR /front
+WORKDIR /var/app/front
 
 COPY . ./
 

@@ -1,16 +1,16 @@
 {
-	"name": "nodejscrud",
-	"version": "1.0.0",
-	"description": "Um projeto de CRUD com Nodejs e React",
-	"main": "server.js",
+	"name": "backend",
+	"version": "0.1.0",
+	"description": "Backend para o projeto",
+	"main": "Server.ts",
 	"scripts":
 	{
-		"back": "cd src/Back && tsnd --watch Server.ts",
-		"front": "cd src/Front && yarn start",
+		"back": "tsnd Server.ts",
+		"front": "yarn start",
 		"app": "concurrently 'yarn run back' 'yarn run front'",
 		"ormcli": "ts-node-dev ./node_modules/typeorm/cli.js",
 		"back-docker": "tsnd Server.ts",
-		"build": "",
+		"build": "tsc",
 		"test": ""
 	},
 	"author": "Jvsm123",

@@ -1,0 +1,29 @@
+{
+	"name": "nodecrud",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"directories": { "test": "test" },
+	"scripts": {
+		"app": "concurrently 'cd ./src/Back/ && npm run back' 'cd ./src/Front && npm run start'",
+		"docker": "docker-compose up"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Jvsm123/NodeCrud.git"
+	},
+	"keywords": [],
+	"author": "Jvsm123",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Jvsm123/NodeCrud/issues"
+	},
+	"dependencies": {
+		"chalk": "^5.0.0",
+		"inquirer": "^8.2.0",
+		"listr": "^0.14.3",
+		"ora": "^6.0.1",
+		"shelljs": "^0.8.5"
+	},
+	"type": "module"
+}
