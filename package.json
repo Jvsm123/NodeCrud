@@ -3,7 +3,9 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
-	"directories": { "test": "test" },
+	"directories": {
+		"test": "test"
+	},
 	"scripts": {
 		"app": "concurrently 'cd ./src/Back/ && npm run back' 'cd ./src/Front && npm run start'",
 		"docker": "docker-compose up"
@@ -20,6 +22,7 @@
 	},
 	"dependencies": {
 		"chalk": "^5.0.0",
+		"concurrently": "^7.0.0",
 		"inquirer": "^8.2.0",
 		"listr": "^0.14.3",
 		"ora": "^6.0.1",

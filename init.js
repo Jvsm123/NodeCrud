@@ -1,5 +1,4 @@
 import ora from 'ora';
-import chalk from 'chalk';
 import listr from 'listr';
 import shell from 'shelljs';
 import inquirer from 'inquirer';
@@ -25,21 +24,33 @@ const init = () =>
 	{
 		const tasks = [];
 
-		const { manager, environment } = options;
+		const spin = ora();
 
-		const spin = ora('Configurando recursos').start();
+		const { manager, environment } = options;
 
 		( manager === "Npm" ) && tasks.push(
 		{
 			title: "Instalando dependências",
 			task: () =>
 			{
+				spin.text = "Configurando Backend";
+				spin.start();
+
 				shell.cd("./src/Back");
 				shell.exec("npm install");
+
+				spin.stop();
+				spin.text = "Configurando Frontend";
+				spin.start();
 
 				shell.cd("-");
 				shell.cd("./src/Front");
 				shell.exec("npm install");
+
+				shell.cd("..");
+				shell.cd("..");
+
+				spin.stop();
 			}
 		})
 
@@ -50,43 +61,38 @@ const init = () =>
 			title: "Instalando dependências",
 			task: () =>
 			{
+				spin.text = "Configurando Backend";
+				spin.start();
+
 				shell.cd("./src/Back");
-				shell.exec("yarn install");
+				shell.exec("\nyarn install");
+
+				spin.stop();
+
+				spin.text = "Configurando Frontend";
+				spin.start();
 
 				shell.cd("-");
 				shell.cd("./src/Front")
-				shell.exec("yarn install");
+				shell.exec("\nyarn install");
+
+				shell.cd("..");
+				shell.cd("..");
+
+				spin.stop();
 			}
-		});
-
-		spin.text ='Implementando estratégia';
-
-		( manager === "npm" && environment === "Docker" ) && tasks.push(
-		{
-			title: "Executando containers",
-			task: () => shell.exec("npm run docker")
-		});
-
-		( manager === "npm" && environment === "Nativo" ) && tasks.push(
-		{
-			title: "Executando app",
-			task: () => shell.exec("npm run app")
-		});
-
-		( manager === "yarn" && environment === "Docker" ) && tasks.push(
-		{
-			title: "Executando containers",
-			task: () => shell.exec("npm run docker")
-		});
-
-		( manager === "yarn" && environment === "Nativo" ) && tasks.push(
-		{
-			title: "Executando app",
-			task: () => shell.exec("yarn run app")
 		});
 
 		new listr(tasks)
 			.run()
+			.then( () =>
+			{
+				(environment === "Nativo")
+					&& shell.echo("para rodar, basta digitar 'npm run app' na raiz do projeto ;)");
+
+				(environment === "Docker")
+					&& shell.echo("Para rodar, basta digitar 'npm run docker' na raiz do projeto :)");
+			})
 			.catch( err => console.error("houve um problema aqui: ", err) );
 	});
 }

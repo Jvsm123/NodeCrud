@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, ReactElement } from 'react';
 
 import {
     Alert,
@@ -17,16 +17,9 @@ import { Navbar } from '../../UI/Navbar/Navbar';
 
 import { Api } from '../../Functions/ApiHandler';
 
-interface State
-{
-    titulo: string;
-    slug: string;
-    msg: string | number;
-    redirectTo: null | string;
-    pop: boolean;
-};
+import { IAddPostState } from '../../../utils/UPosts';
 
-export class AddComponent extends Component< {}, State >
+export class AddComponent extends Component< {}, IAddPostState >
 {
     state =
     {
@@ -37,7 +30,7 @@ export class AddComponent extends Component< {}, State >
         pop: false
     };
  
-    Api( state: State ): void
+    Api( state: IAddPostState ): void
     {
         if( state.titulo !== "" && state.slug !== "" )
         {
@@ -54,7 +47,7 @@ export class AddComponent extends Component< {}, State >
         else this.setState({ pop: true });
     };
  
-    render(): React.ReactElement<HTMLElement>
+    render(): ReactElement<HTMLElement>
     {
         if( this.state.redirectTo )
             return <Navigate

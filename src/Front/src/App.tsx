@@ -1,7 +1,8 @@
-import { Component } from 'react';
+import { Component, ReactElement } from 'react';
+
 import { Router } from './screens/router';
 
 export class App extends Component< {}, {} >
 {
-    render(): React.ReactElement<HTMLElement> { return <Router/> };
+    render(): ReactElement<HTMLElement> { return <Router/> };
 };

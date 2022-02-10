@@ -10,8 +10,8 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     volumes:
-      - /var/app/front/node_modules
-      - /var/app/front
+      - ./src/Front/node_modules:/var/app/front/node_modules
+      - ./src/Front:/var/app/front
 
   backend:
     container_name: "backend"
@@ -28,8 +28,8 @@ services:
     environment:
       DATABASE_URL: mysqlx://root:crud1234@database:3306/nodeCrud
     volumes:
-      - /var/app/back/node_modules
-      - /var/app/back
+      - ./src/Back/node_modules:/var/app/back/node_modules
+      - ./src/Back:/var/app/back
 
   nginx:
     build:
@@ -40,7 +40,7 @@ services:
       - backend
     restart: always
     ports:
-      - "80:80"
+      - "8081:8081"
 
   database:
     container_name: "data_crudApp"

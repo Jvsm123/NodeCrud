@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, ReactElement } from 'react';
 
 import {
     Stack,
@@ -7,7 +7,7 @@ import {
 
 export class Navbar extends Component< {}, {} >
 {
-    render(): React.ReactElement<HTMLElement>
+    render(): ReactElement<HTMLElement>
     {
         return(
             <Stack

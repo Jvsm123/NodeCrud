@@ -2,12 +2,10 @@
 	"name": "backend",
 	"version": "0.1.0",
 	"description": "Backend para o projeto",
-	"main": "Server.ts",
+	"main": "Server.js",
 	"scripts":
 	{
 		"back": "tsnd Server.ts",
-		"front": "yarn start",
-		"app": "concurrently 'yarn run back' 'yarn run front'",
 		"ormcli": "ts-node-dev ./node_modules/typeorm/cli.js",
 		"back-docker": "tsnd Server.ts",
 		"build": "tsc",

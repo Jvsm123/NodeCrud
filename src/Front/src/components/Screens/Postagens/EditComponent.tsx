@@ -1,17 +1,17 @@
-import { Component } from 'react';
+import { Component, ReactElement } from 'react';
 
 import {
-    Alert,
-    Card,
-    CircularProgress,
-    Container,
-    Backdrop,
-    InputLabel,
-    TextField,
-    Button,
-    Typography,
-    Snackbar,
-    Stack
+	Alert,
+	Card,
+	CircularProgress,
+	Container,
+	Backdrop,
+	InputLabel,
+	TextField,
+	Button,
+	Typography,
+	Snackbar,
+	Stack
 } from '@mui/material';
 
 import { Navigate } from 'react-router-dom';
@@ -20,21 +20,9 @@ import { Api } from '../../Functions/ApiHandler';
 
 import { Navbar } from '../../UI/Navbar/Navbar';
 
-interface State
-{
-    newTitulo: string;
-    newSlug: string;
- 
-    id: string;
-    titulo: string;
-    slug: string;
- 
-    redirectTo: string | null;
-    pop: boolean;
-    openCircle: boolean;
-};
+import { IEditPostState } from '../../../utils/UPosts';
 
-export class EditComponent extends Component< {}, State >
+export class EditComponent extends Component< {}, IEditPostState >
 {
     state =
     {
@@ -61,7 +49,7 @@ export class EditComponent extends Component< {}, State >
         }));
     };
  
-    ApiEdit( state: State ): void
+    ApiEdit( state: IEditPostState ): void
     {
         if( state.newTitulo !== "" && state.newSlug !== "" )
         {
@@ -82,7 +70,7 @@ export class EditComponent extends Component< {}, State >
         this.ApiList( id );
     };
  
-    render(): React.ReactElement< HTMLElement >
+    render(): ReactElement< HTMLElement >
     {
         if( !this.state.id && !this.state.titulo && !this.state.slug )
             return <CircularProgress/>

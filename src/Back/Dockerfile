@@ -10,8 +10,6 @@ COPY .env ./
 
 COPY . ./
 
-RUN yarn install
-
 # EXPOSE 8080
 
 CMD ["yarn", "run", "back-docker"]
