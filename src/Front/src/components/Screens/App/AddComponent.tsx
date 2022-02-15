@@ -52,10 +52,7 @@ export class AddComponent extends Component< ITypeProps, IAddPostState >
     render(): ReactElement<HTMLElement>
     {
         if( this.state.redirectTo )
-            return <Navigate
-                to={this.state.redirectTo}
-                state={this.state.msg}
-            />
+            return <Navigate to={this.state.redirectTo} state={this.state.msg}/>
      
         return(
             <>
@@ -74,59 +71,52 @@ export class AddComponent extends Component< ITypeProps, IAddPostState >
                     </Snackbar>
                 }
              
-                <Container sx={
-                {
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: '80vh'
-                }}>
-                    <Container>
-                        <Typography
-                            variant="h2"
-                            sx={
-                            {
-                                alignSelf: "flex-start",
-                                marginBottom:"15px",
-                                color: "#707070"
-                            }}
-                        >
-                            { this.props.type === "categorias" && 'Nova Categoria'}
-                            { this.props.type === "postagens" && 'Nova Postagem'}
-                        </Typography>
-                        <Card variant="outlined" sx={
+                <Container>
+                    <Typography
+                        variant="h2"
+                        sx={
                         {
-                            width: "100%",
-                            padding: 10,
-                            display: "flex",
-                            flexDirection: "column",
-                            borderColor: "#DCFFDB",
-                            backgroundColor: "#EBFFEB"
-                        }}>
-                            <InputLabel sx={{fontSize: "25px"}}>Título:</InputLabel>
-                            <TextField
-                                type="text"
-                                inputProps={{maxLength: 30}}
-                                sx={{marginBottom: "15px"}}
-                                onChange={(e) => this.setState({titulo: e.target.value})}
-                            />
+                            alignSelf: "flex-start",
+                            marginBottom:"15px",
+                            color: "#707070"
+                        }}
+                    >
+	                    { this.props.type === "categorias" && 'Nova Categoria'}
+	                    { this.props.type === "postagens" && 'Nova Postagem'}
+                    </Typography>
 
-                            <InputLabel sx={{fontSize: "25px"}}>Slug:</InputLabel>
-                            <TextField
-                                inputProps={{maxLength: 30}}
-                                type="text"
-                                onChange={(e) => this.setState({slug: e.target.value})}
-                            />
+                    <Card variant="outlined" sx={
+                    {
+                        width: "100%",
+                        padding: 10,
+                        display: "flex",
+                        flexDirection: "column",
+                        borderColor: "#DCFFDB",
+                        backgroundColor: "#EBFFEB"
+                    }}>
+                        <InputLabel sx={{fontSize: "25px"}}>Título:</InputLabel>
+                        <TextField
+                            type="text"
+                            inputProps={{maxLength: 30}}
+                            sx={{marginBottom: "15px"}}
+                            onChange={(e) => this.setState({titulo: e.target.value})}
+                        />
 
-                            <Button
-                                variant="contained"
-                                color="success"
-                                sx={{marginTop: "25px"}}
-                                onClick={() => this.Api(this.state) }
-                            >Criar Categeoria</Button>
-                        </Card>
-                    </Container>
+                        <InputLabel sx={{fontSize: "25px"}}>Slug:</InputLabel>
+                        <TextField
+                            inputProps={{maxLength: 30}}
+                            type="text"
+                            onChange={(e) => this.setState({slug: e.target.value})}
+                        />
+
+                        <Button
+                            variant="contained"
+                            color="success"
+                            sx={{marginTop: "25px"}}
+                            onClick={() => this.Api(this.state) }
+                            >Criar Categeoria
+						</Button>
+                    </Card>
                 </Container>
             </>
         );

@@ -45,7 +45,7 @@ services:
   database:
     container_name: "data_crudApp"
     image: "mysql"
-    command: --default-authentication-plugin=mysql_native_password
+    command: --authentication_policy=mysql_native_password
     ports:
       - "3306:3306"
     volumes:

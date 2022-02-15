@@ -119,7 +119,7 @@ export class ListComponent extends Component< ITypeProps, IListState >
 				 
 					<Link to={`/admin/add${this.props.type}`}>
 						<Button variant="contained" color="success">
-							Nova {( this.props.type === 'categoria' && 'Categoria') || 'Postagem'}
+							Nova {( this.props.type === 'categorias' && 'Categoria') || 'Postagem'}
 						</Button>
 					</Link>
 				 

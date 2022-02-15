@@ -42,7 +42,7 @@ export class EditComponent extends Component< ITypeProps, IEditPostState >
  
     ApiList( id: string ): void
     {
-        Api.ListAdm( this.props.type, id ).then( (res: any) => this.setState(
+        Api.ListOneAdm( this.props.type, id ).then( (res: any) => this.setState(
         {
             id: res.id,
             titulo: res.titulo,
@@ -59,7 +59,7 @@ export class EditComponent extends Component< ITypeProps, IEditPostState >
             {
                 sessionStorage.setItem( "msg", res );
              
-                this.setState({ redirectTo: `admin/${this.props.type}` });
+                this.setState({ redirectTo: `${this.props.type}` });
             });
         }
         else this.setState({ pop: true });
@@ -74,6 +74,8 @@ export class EditComponent extends Component< ITypeProps, IEditPostState >
  
     render(): ReactElement< HTMLElement >
     {
+		console.log( this.state );
+
         if( !this.state.id && !this.state.titulo && !this.state.slug ) return <CircularProgress/>
      
         if( this.state.redirectTo ) return <Navigate to={this.state.redirectTo}/>

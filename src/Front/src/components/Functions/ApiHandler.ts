@@ -2,11 +2,9 @@ import { IDataSend, IDataEdit } from '../../utils/UFunctions';
 
 export class Api
 {
-	static async ListAdm( type: string, id?: string ): Promise< any >
+	static async ListAdm( type: string ): Promise< any >
 	{
 		let url = `http://localhost:8081/backend/admin/${type}/all`;
-	 
-		if( id ) url += `?id=${id}`;
 	 
 		const response = await fetch( url );
 	 
@@ -16,6 +14,19 @@ export class Api
 	 
 		return body;
 	};
+
+	static async ListOneAdm( type: string, id: string )
+	{
+		let url = `http://localhost:8081/backend/admin/${type}/one/${id}`;
+
+		const response = await fetch( url );
+
+		if( response.status !== 200 ) throw new Error( "ERRO" );
+
+		const body = await response.json();
+
+		return body;
+	}
  
 	static async SendAdm( type: string, { titulo, slug }: IDataSend ): Promise< string >
 	{

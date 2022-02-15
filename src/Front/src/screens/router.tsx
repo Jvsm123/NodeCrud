@@ -30,12 +30,12 @@ export class Router extends Component< {}, {} >
 				<Routes>
 					<Route path="/admin">
 						<Route path="categorias" element={ <IndexCategorias/> }/>
-						<Route path="addCategorias" element={ <AddCategorias/> }/>
-						<Route path="editCategorias" element={ <EditCategorias/> }/>
+						<Route path="addcategorias" element={ <AddCategorias/> }/>
+						<Route path="editcategorias" element={ <EditCategorias/> }/>
 
 						<Route path="postagens" element={ <IndexPostagens/> }/>
-						<Route path="addPostagens" element={ <AddPostagens/> }/>
-						<Route path="editPostagens" element={ <EditPostagens/> }/>
+						<Route path="addpostagens" element={ <AddPostagens/> }/>
+						<Route path="editpostagens" element={ <EditPostagens/> }/>
 					</Route>
 
 					<Route path="*" element={ <NotFound/> }/>
