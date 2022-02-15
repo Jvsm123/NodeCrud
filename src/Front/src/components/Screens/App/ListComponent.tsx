@@ -21,29 +21,17 @@ import {
 	Typography
 } from '@mui/material';
 
-import {
-	DeleteForever,
-	Edit
-} from '@mui/icons-material'
-
-import { Link, Navigate } from 'react-router-dom';
-
-import { Navbar } from '../../UI/Navbar/Navbar';
+import { Navbar } from '../../UI/Navbar';
 
 import { Api } from '../../Functions/ApiHandler';
 
-type State =
-{
-	data: any;
-	msg?: string;
-	openPop: boolean;
-	openCircle: boolean;
-	openDialog: boolean;
-	id: string | null;
-	redirectTo: string | null;
-};
+import { ITypeProps, IListState } from '../../../utils/UApp';
 
-export class ListComponent extends Component< {}, State >
+import { Link, Navigate } from 'react-router-dom';
+
+import { DeleteForever, Edit } from '@mui/icons-material';
+
+export class ListComponent extends Component< ITypeProps, IListState >
 {
 	state =
 	{
@@ -58,7 +46,7 @@ export class ListComponent extends Component< {}, State >
  
 	async ApiDelete( ID: string ): Promise< void >
 	{
-		const res = await Api.RemoveAdm( ID );
+		const res = await Api.RemoveAdm( this.props.type, ID );
 	 
 		if( !res ) window.sessionStorage.setItem( "msg", "Erro ao remover!" );
 	 
@@ -69,7 +57,7 @@ export class ListComponent extends Component< {}, State >
  
 	async componentDidMount(): Promise< void >
 	{
-		const data = await Api.ListAdm();
+		const data = await Api.ListAdm( this.props.type );
 	 
 		const msg: string | null = sessionStorage.getItem("msg");
 	 
@@ -85,15 +73,11 @@ export class ListComponent extends Component< {}, State >
  
 	render(): ReactElement<HTMLElement>
 	{
-		if( this.state.redirectTo )
-			return <Navigate to={this.state.redirectTo}/>
+		if( this.state.redirectTo ) return <Navigate to={this.state.redirectTo}/>
 	 
 		return (
 			<>
-				<Backdrop
-					open={this.state.openCircle}
-					sx={{color: "#fff", zIndex: 99}}
-				>
+				<Backdrop open={this.state.openCircle} sx={{color: "#fff", zIndex: 99}}>
 					<CircularProgress/>
 				</Backdrop>
 			 
@@ -110,6 +94,7 @@ export class ListComponent extends Component< {}, State >
 				{ this.state.openDialog &&
 					<Dialog open={ this.state.openDialog }>
 						<DialogTitle>"Deletar Conteúdo?"</DialogTitle>
+
 						<DialogActions>
 							<Button onClick={() =>
 								{
@@ -126,13 +111,15 @@ export class ListComponent extends Component< {}, State >
 				<Navbar/>
 			 
 				<Container>
-					<Typography color="primary" variant="h3">Lista de Categorias</Typography>
+					<Typography color="primary" variant="h3">
+						Lista de {(this.props.type === "categorias" && 'Categorias') || 'Postagens'}
+					</Typography>
 				 
 					<Divider sx={{marginBottom: "20px"}}/>
 				 
-					<Link to="/admin/addPostagens">
+					<Link to={`/admin/add${this.props.type}`}>
 						<Button variant="contained" color="success">
-							Nova Categoria
+							Nova {( this.props.type === 'categoria' && 'Categoria') || 'Postagem'}
 						</Button>
 					</Link>
 				 
@@ -145,15 +132,11 @@ export class ListComponent extends Component< {}, State >
 						>
 							<ListItem sx={{justifyContent: "space-between"}}>
 								<Stack spacing={2}>
-									<Typography variant="h5" color="secondary">
-										{e.titulo}
-									</Typography>
+									<Typography variant="h5" color="secondary">{e.titulo}</Typography>
 								 
 									<ListItemText>Slug: {e.slug}</ListItemText>
 								 
-									<ListItemText>
-										Data de Criação: {e.createdAt}
-									</ListItemText>
+									<ListItemText>Data de Criação: {e.createdAt}</ListItemText>
 								</Stack>
 							 
 								<Stack direction="row" spacing={2}>
@@ -164,12 +147,8 @@ export class ListComponent extends Component< {}, State >
 									>
 									</DeleteForever>
 								 
-									<Link to={`/admin/editPostagens/?id=${e.id}`}>
-										<Edit
-											color="primary"
-											sx={{cursor: "pointer"}}
-										>
-										</Edit>
+									<Link to={`/admin/edit${this.props.type}/?id=${e.id}`}>
+										<Edit color="primary" sx={{cursor: "pointer"}}></Edit>
 									</Link>
 								</Stack>
 							</ListItem>

@@ -2,7 +2,7 @@ import { Component, ReactElement } from 'react';
 
 import { Button, Container } from '@mui/material/';
 
-import { Navbar } from '../../UI/Navbar/Navbar';
+import { Navbar } from '../../UI/Navbar';
 
 export class AdminComponent extends Component< {}, {} >
 {

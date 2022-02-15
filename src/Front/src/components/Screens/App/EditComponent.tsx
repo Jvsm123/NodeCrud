@@ -18,11 +18,13 @@ import { Navigate } from 'react-router-dom';
 
 import { Api } from '../../Functions/ApiHandler';
 
-import { Navbar } from '../../UI/Navbar/Navbar';
+import { Navbar } from '../../UI/Navbar';
 
 import { IEditPostState } from '../../../utils/UPosts';
 
-export class EditComponent extends Component< {}, IEditPostState >
+import { ITypeProps } from '../../../utils/UApp';
+
+export class EditComponent extends Component< ITypeProps, IEditPostState >
 {
     state =
     {
@@ -40,7 +42,7 @@ export class EditComponent extends Component< {}, IEditPostState >
  
     ApiList( id: string ): void
     {
-        Api.ListAdm( id ).then( (res: any) => this.setState(
+        Api.ListAdm( this.props.type, id ).then( (res: any) => this.setState(
         {
             id: res.id,
             titulo: res.titulo,
@@ -53,11 +55,11 @@ export class EditComponent extends Component< {}, IEditPostState >
     {
         if( state.newTitulo !== "" && state.newSlug !== "" )
         {
-            Api.EditAdm( state, this.state.id ).then( (res: string) =>
+            Api.EditAdm( this.props.type, state, this.state.id ).then( (res: string) =>
             {
                 sessionStorage.setItem( "msg", res );
              
-                this.setState({ redirectTo: "/admin/categorias" });
+                this.setState({ redirectTo: `admin/${this.props.type}` });
             });
         }
         else this.setState({ pop: true });
@@ -72,11 +74,9 @@ export class EditComponent extends Component< {}, IEditPostState >
  
     render(): ReactElement< HTMLElement >
     {
-        if( !this.state.id && !this.state.titulo && !this.state.slug )
-            return <CircularProgress/>
+        if( !this.state.id && !this.state.titulo && !this.state.slug ) return <CircularProgress/>
      
-        if( this.state.redirectTo )
-            return <Navigate to={this.state.redirectTo}/>
+        if( this.state.redirectTo ) return <Navigate to={this.state.redirectTo}/>
      
         return (
             <>
@@ -142,10 +142,7 @@ export class EditComponent extends Component< {}, IEditPostState >
                                 backgroundColor: "#EBFFEB"
                             }}
                         >
-                            <InputLabel sx={{fontSize: "25px"}}>
-                                Novo Titulo:
-                            </InputLabel>
-                         
+                            <InputLabel sx={{fontSize: "25px"}}>Novo Titulo:</InputLabel>
                             <TextField
                                 placeholder={this.state.titulo}
                                 inputProps={{maxLength: 30}}
@@ -153,10 +150,7 @@ export class EditComponent extends Component< {}, IEditPostState >
                                 onChange={(e) => this.setState({newTitulo: e.target.value})}
                             />
                          
-                            <InputLabel sx={{fontSize: "25px"}}>
-                                Novo Slug:
-                            </InputLabel>
-                         
+                            <InputLabel sx={{fontSize: "25px"}}>Novo Slug:</InputLabel>
                             <TextField
                                 placeholder={this.state.slug}
                                 inputProps={{maxLength: 30}}

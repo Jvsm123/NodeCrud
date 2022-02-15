@@ -11,15 +11,17 @@ import {
     Snackbar
 } from '@mui/material';
 
-import { Navigate } from 'react-router-dom';
+import { Navbar } from '../../UI/Navbar';
 
-import { Navbar } from '../../UI/Navbar/Navbar';
+import { Navigate } from 'react-router-dom';
 
 import { Api } from '../../Functions/ApiHandler';
 
+import { ITypeProps } from '../../../utils/UApp';
+
 import { IAddPostState } from '../../../utils/UPosts';
 
-export class AddComponent extends Component< {}, IAddPostState >
+export class AddComponent extends Component< ITypeProps, IAddPostState >
 {
     state =
     {
@@ -36,12 +38,12 @@ export class AddComponent extends Component< {}, IAddPostState >
         {
             const { titulo, slug } = state;
          
-            Api.SendAdm({ titulo: titulo, slug: slug })
+            Api.SendAdm( this.props.type, { titulo: titulo, slug: slug })
             .then( ( res: string ) =>
             {
                 sessionStorage.setItem("msg", res );
              
-                this.setState({ redirectTo: "/admin/categorias" });
+                this.setState({ redirectTo: `/admin/${this.props.type}` });
             });
         }
         else this.setState({ pop: true });
@@ -90,7 +92,8 @@ export class AddComponent extends Component< {}, IAddPostState >
                                 color: "#707070"
                             }}
                         >
-                            Nova Categoria
+                            { this.props.type === "categorias" && 'Nova Categoria'}
+                            { this.props.type === "postagens" && 'Nova Postagem'}
                         </Typography>
                         <Card variant="outlined" sx={
                         {

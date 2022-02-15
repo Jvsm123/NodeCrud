@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import { Navbar } from '../../UI/Navbar/Navbar';
+import { Navbar } from '../../UI/Navbar';
 
 export class UsuariosComponent extends Component< {}, {} >
 {

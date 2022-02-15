@@ -1,22 +1,10 @@
-interface IDataSend
-{
-	titulo: string;
-	slug: string;
-};
-
-interface IDataEdit
-{
-	titulo: string;
-	newTitulo: string;
-	slug: string;
-	newSlug: string;
-};
+import { IDataSend, IDataEdit } from '../../utils/UFunctions';
 
 export class Api
 {
-	static async ListAdm( id?: string ): Promise< any >
+	static async ListAdm( type: string, id?: string ): Promise< any >
 	{
-		let url = "http://localhost:8081/backend/admin/categorias/all";
+		let url = `http://localhost:8081/backend/admin/${type}/all`;
 	 
 		if( id ) url += `?id=${id}`;
 	 
@@ -29,10 +17,10 @@ export class Api
 		return body;
 	};
  
-	static async SendAdm( { titulo, slug }: IDataSend ): Promise< string >
+	static async SendAdm( type: string, { titulo, slug }: IDataSend ): Promise< string >
 	{
 		const response = await fetch (
-			"http://localhost:8081/backend/admin/categorias/add",
+			`http://localhost:8081/backend/admin/${type}/add`,
 			{
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
@@ -51,10 +39,10 @@ export class Api
 		return body;
 	};
  
-	static async EditAdm( state: IDataEdit, ID: string ): Promise< string >
+	static async EditAdm( type: string, state: IDataEdit, ID: string ): Promise< string >
 	{
 		const response = await fetch(
-			`http://localhost:8081/backend/admin/categorias/edit/${ID}`,
+			`http://localhost:8081/backend/admin/${type}/edit/${ID}`,
 			{
 				method: "PUT",
 				headers: { "Content-Type": "application/json" },
@@ -75,10 +63,10 @@ export class Api
 		return body;
 	};
  
-	static async RemoveAdm( ID: string ): Promise< string >
+	static async RemoveAdm( type: string, ID: string ): Promise< string >
 	{
 		const response = await fetch (
-			`http://localhost:8081/backend/admin/categorias/remove/${ID}`,
+			`http://localhost:8081/backend/admin/${type}/remove/${ID}`,
 			{ method: "DELETE" }
 		);
 	 

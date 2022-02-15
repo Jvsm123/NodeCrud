@@ -1,8 +1,8 @@
-import { Component } from 'react';
+import { Component, ReactElement } from 'react';
 
-import { ListComponent } from '../../components/Screens/Postagens/ListComponent';
+import { ListComponent } from '../../components/Screens/App/ListComponent';
 
 export class IndexPostagens extends Component< {}, {} >
 {
-    render(): React.ReactElement<HTMLElement> { return <ListComponent/> };
+	render(): ReactElement<HTMLElement> { return <ListComponent type={'postagens'}/> };
 };
