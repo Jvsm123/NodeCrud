@@ -9,7 +9,7 @@ export class AllCategoriasController
 		const allCategoriasService = new AllCategoriasService();
 
 		const allPosts = await allCategoriasService.execute();
-	 
+
 		return res.json( allPosts );
 	};
 };
