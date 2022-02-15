@@ -14,14 +14,12 @@ export class EditCategoriasService
 		 
 			let categoria = await categoriasRepo.findOne({ where: { id: ID } });
 
-			if( categoria )
-			{
-				data.titulo && (categoria.titulo = data.titulo);
+			if( !categoria ) return "categoria não encontrada!";
+
+			data.titulo && (categoria.titulo = data.titulo);
 		 
-				data.slug && (categoria.slug = data.slug);
-			}
-			else return "categoria não encontrada!";
-		 
+			data.slug && (categoria.slug = data.slug);
+
 			await categoriasRepo.update( ID, categoria );
 
 			return "Categoria editada com sucesso!";

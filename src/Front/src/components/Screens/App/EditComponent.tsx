@@ -59,7 +59,7 @@ export class EditComponent extends Component< ITypeProps, IEditPostState >
             {
                 sessionStorage.setItem( "msg", res );
              
-                this.setState({ redirectTo: `${this.props.type}` });
+                this.setState({ redirectTo: `/admin/${this.props.type}` });
             });
         }
         else this.setState({ pop: true });
