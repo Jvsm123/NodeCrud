@@ -15,10 +15,10 @@ export class Categorias
 	slug: string;
  
 	@CreateDateColumn()
-	createAt: Date;
+	created_at: Date;
  
 	@UpdateDateColumn()
-	updateAt: Date;
+	updated_at: Date;
 
 	@OneToMany( () => Postagens, post => post.categoria )
 	postagens: Postagens[];

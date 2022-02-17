@@ -10,6 +10,4 @@ COPY .env ./
 
 COPY . ./
 
-# EXPOSE 8080
-
 CMD ["yarn", "run", "back-docker"]

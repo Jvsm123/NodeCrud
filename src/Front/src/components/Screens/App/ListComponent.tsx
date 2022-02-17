@@ -136,7 +136,7 @@ export class ListComponent extends Component< ITypeProps, IListState >
 								 
 									<ListItemText>Slug: {e.slug}</ListItemText>
 								 
-									<ListItemText>Data de Criação: {e.createdAt}</ListItemText>
+									<ListItemText>Data de Criação: {e.created_at}</ListItemText>
 								</Stack>
 							 
 								<Stack direction="row" spacing={2}>

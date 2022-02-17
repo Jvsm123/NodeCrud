@@ -22,7 +22,6 @@ services:
       - database
     links:
       - database
-    restart: always
     env_file:
       - ./src/Back/.env
     environment:
@@ -43,18 +42,18 @@ services:
       - "8081:8081"
 
   database:
-    container_name: "data_crudApp"
+    container_name: "database"
     image: "mysql"
-    command: --authentication_policy=mysql_native_password
+    command: --default-authentication-plugin=mysql_native_password
     ports:
       - "3306:3306"
     volumes:
       - dbdata:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: "crud1234"
-      MYSQL_DATABASE: "nodeCrud"
-      MYSQL_USER: "nodecrud"
-      MYSQL_PASSWORD: "crud1234"
+      MYSQL_ROOT_PASSWORD: crud1234
+      MYSQL_DATABASE: nodeCrud
+      MYSQL_USER: nodecrud
+      MYSQL_PASSWORD: crud1234
 
 volumes:
   dbdata: {}
