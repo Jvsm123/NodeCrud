@@ -2,17 +2,6 @@ version: '3'
 
 services:
 
-  frontend:
-    container_name: "frontend"
-    build:
-      context: ./src/Front
-      dockerfile: Dockerfile
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    volumes:
-      - ./src/Front/node_modules:/var/app/front/node_modules
-      - ./src/Front:/var/app/front
-
   backend:
     container_name: "backend"
     build:
@@ -25,35 +14,22 @@ services:
     env_file:
       - ./src/Back/.env
     environment:
-      DATABASE_URL: mysqlx://root:crud1234@database:3306/nodeCrud
+      DATABASE_URL: "postgres://postgres:api@database:5432/nodeCrud"
     volumes:
       - ./src/Back/node_modules:/var/app/back/node_modules
       - ./src/Back:/var/app/back
 
-  nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    depends_on:
-      - frontend
-      - backend
-    restart: always
-    ports:
-      - "8081:8081"
-
   database:
     container_name: "database"
-    image: "mysql"
-    command: --default-authentication-plugin=mysql_native_password
+    image: "postgres:alpine"
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - dbdata:/var/lib/mysql
+      - dbdata:/var/lib/postgres
     environment:
-      MYSQL_ROOT_PASSWORD: crud1234
-      MYSQL_DATABASE: nodeCrud
-      MYSQL_USER: nodecrud
-      MYSQL_PASSWORD: crud1234
+      POSTGRES_DATABASE: nodeCrud
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: api
 
 volumes:
   dbdata: {}
