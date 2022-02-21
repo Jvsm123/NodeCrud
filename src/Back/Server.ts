@@ -10,7 +10,7 @@ import "reflect-metadata"; //Para uso do typeorm
 
 import "express-async-errors"; //Para uso de tratamento de erros no express;
 
-import "./Database/index.ts";
+import "./Database/index";
 
 import Admin from './Routes/Admin';
 

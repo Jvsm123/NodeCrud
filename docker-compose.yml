@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 
 services:
 
@@ -23,9 +23,9 @@ services:
     links:
       - database
     env_file:
-      - "./src/Back/.env"
+      - ./src/Back/.env
     environment:
-      DATABASE_URL: "postgres://postgres:api@database:5432/nodeCrud"
+      DATABASE_URL: mysqlx://root:api@database:3306/nodecrud
     volumes:
       - "./src/Back/node_modules:/var/app/back/node_modules"
       - "./src/Back:/var/app/back"
@@ -42,16 +42,16 @@ services:
       - "8081:8081"
 
   database:
-    container_name: "database1"
-    image: "postgres:alpine"
+    container_name: "mysql"
+    image: mysql
+    restart: always
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - "database-data:/var/lib/postgres"
+      - db_data:/var/lib/mysql
     environment:
-      POSTGRES_DATABASE: "nodeCrud"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "api"
+      MYSQL_ROOT_PASSWORD: api
+      MYSQL_DATABASE: nodecrud
 
 volumes:
-  database-data: {}
+  db_data: {}
