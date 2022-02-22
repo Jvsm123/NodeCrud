@@ -2,12 +2,18 @@ export interface IDataSend
 {
 	titulo: string;
 	slug: string;
+	conteudo?: string;
+	descricao?: string;
+	categoria?: string;
 };
 
 export interface IDataEdit
 {
 	titulo: string;
-	newTitulo: string;
 	slug: string;
-	newSlug: string;
+	newTitulo?: string;
+	newSlug?: string
+	conteudo?: string;
+	descricao?: string;
+	categoria?: string;
 };

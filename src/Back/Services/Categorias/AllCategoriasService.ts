@@ -12,7 +12,7 @@ export class AllCategoriasService
 
 		const categoriasRepo = getCustomRepository( CategoriasRepo );
 
-		allCategorias = await categoriasRepo.find();
+		allCategorias = await categoriasRepo.find({ order: { created_at: "DESC" } });
 
 		return allCategorias;
 	};

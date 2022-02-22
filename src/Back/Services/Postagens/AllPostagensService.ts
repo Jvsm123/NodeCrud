@@ -12,7 +12,7 @@ export class AllPostagensService
 
 		const postagensRepo = getCustomRepository( PostagensRepo );
 
-		allPosts = await postagensRepo.find();
+		allPosts = await postagensRepo.find({ order: { created_at: "DESC" } });
 
 		return allPosts;
 	};

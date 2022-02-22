@@ -28,7 +28,7 @@ export class Api
 		return body;
 	}
  
-	static async SendAdm( type: string, { titulo, slug }: IDataSend ): Promise< string >
+	static async SendAdm( type: string, state: IDataSend ): Promise< string >
 	{
 		const response = await fetch (
 			`http://localhost:8081/backend/admin/${type}/add`,
@@ -37,8 +37,11 @@ export class Api
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify (
 				{
-					titulo: titulo,
-					slug: slug
+					titulo: state.titulo,
+					slug: state.slug,
+					descricao: state.descricao,
+					conteudo: state.conteudo,
+					categoria: state.categoria
 				})
 			}
 		);
@@ -60,9 +63,12 @@ export class Api
 				body: JSON.stringify(
 				{
 					titulo: state.titulo,
-					newTitulo: state.newTitulo,
 					slug: state.slug,
+					newTitulo: state.newTitulo,
 					newSlug: state.newSlug,
+					descricao: state.descricao,
+					conteudo: state.conteudo,
+					categoria: state.categoria
 				})
 			}
 		);
