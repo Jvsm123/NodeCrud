@@ -37,10 +37,7 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 	{
 		if( state.titulo !== "" && state.slug !== "" )
 		{
-			const { titulo, slug } = state;
-
-			Api.SendAdm( this.props.type, { titulo: titulo, slug: slug })
-			.then( ( res: string ) =>
+			Api.SendAdm( this.props.type, state ).then( ( res: string ) =>
 			{
 				sessionStorage.setItem("msg", res );
 

@@ -76,10 +76,7 @@ export class EditComponent extends Component< ITypeProps, IEditState >
 
 		return (
 			<>
-				<Backdrop
-					open={this.state.openCircle}
-					sx={{color: "#fff", zIndex: 99}}
-				>
+				<Backdrop open={this.state.openCircle} sx={{color: "#fff", zIndex: 99}}>
 					<CircularProgress/>
 				</Backdrop>
 
