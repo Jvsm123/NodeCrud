@@ -1,4 +1,4 @@
-import { IDataSend, IDataEdit } from '../../utils/UFunctions';
+import { TDataSend, TDataEdit } from '../../utils/UFunctions';
 
 const base: string = "http://localhost:8081/backend/admin/";
 
@@ -26,7 +26,7 @@ export class Api
 		return body;
 	}
 
-	static async SendAdm( type: string, state: IDataSend ): Promise< string >
+	static async SendAdm( type: string, state: TDataSend ): Promise< string >
 	{
 		const response = await fetch( `${base}${type}/add`,
 		{
@@ -49,7 +49,7 @@ export class Api
 		return body;
 	};
 
-	static async EditAdm( type: string, state: IDataEdit, ID: string ): Promise< string >
+	static async EditAdm( type: string, state: TDataEdit, ID: string ): Promise< string >
 	{
 		const response = await fetch( `${base}${type}/edit/${ID}`,
 		{

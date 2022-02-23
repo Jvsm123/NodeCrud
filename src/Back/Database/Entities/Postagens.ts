@@ -1,11 +1,4 @@
-import {
-	Entity,
-	Column,
-	ManyToOne,
-	PrimaryGeneratedColumn,
-	CreateDateColumn,
-	UpdateDateColumn
-} from 'typeorm';
+import { Entity, Column, ManyToOne, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 import { Categorias } from './Categorias';
 
@@ -21,10 +14,10 @@ export class Postagens
 	@Column()
 	slug: string;
 
-	@Column({ nullable: true, type: "text" })
+	@Column({ nullable: false, type: "text" })
 	descricao: string;
 
-	@Column({ nullable: true, type: "blob" })
+	@Column({ nullable: false, type: "blob" })
 	conteudo?: string | any[any];
 
 	@CreateDateColumn()

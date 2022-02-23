@@ -1,19 +1,5 @@
-export interface IDataSend
-{
-	titulo: string;
-	slug: string;
-	conteudo?: string;
-	descricao?: string;
-	categoria?: string;
-};
+import { IAddState, IEditState } from './UApp';
 
-export interface IDataEdit
-{
-	titulo: string;
-	slug: string;
-	newTitulo?: string;
-	newSlug?: string
-	conteudo?: string;
-	descricao?: string;
-	categoria?: string;
-};
+export type TDataSend = Omit<IAddState, "msg"|"redirectTo"|"pop">;
+
+export type TDataEdit = Omit<IEditState, "msg"|"redirectTo"|"pop">

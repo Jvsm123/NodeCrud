@@ -21,7 +21,8 @@ export interface IAddState
 	slug: string;
 	descricao?: string;
 	conteudo?: string | any[any];
-	categoria?: string;
+	categoria?: string[];
+	categorias?: string[] | null;
 
 	msg: string | number;
 	redirectTo: null | string;
@@ -30,8 +31,8 @@ export interface IAddState
 
 export interface IEditState
 {
-	newTitulo?: string;
-	newSlug?: string;
+	newTitulo: string;
+	newSlug: string;
 	descricao?: string;
 	conteudo?: string | any[any];
 	categoria?: string;

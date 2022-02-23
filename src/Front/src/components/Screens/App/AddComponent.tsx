@@ -2,13 +2,17 @@ import { Component, ReactElement } from 'react';
 
 import {
     Alert,
-    Card,
-    Container,
-    InputLabel,
-    TextField,
+	Box,
     Button,
-    Typography,
-    Snackbar
+    Card,
+	Chip,
+    Container,
+	MenuItem,
+    InputLabel,
+    Snackbar,
+	Select,
+    TextField,
+    Typography
 } from '@mui/material';
 
 import { Navbar } from '../../UI/Navbar';
@@ -26,8 +30,9 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 		titulo: "",
 		slug: "",
 		descricao: "",
+		categoria: [],
+		categorias: null,
 		conteudo: "",
-		categoria: "",
 		redirectTo: null,
 		msg: "",
 		pop: false
@@ -45,6 +50,18 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 			});
 		}
 		else this.setState({ pop: true });
+	};
+
+	async componentDidMount(): Promise<void>
+	{
+		if( this.props.type === "postagens" )
+		{
+			const result = await Api.ListAdm( "categorias" );
+
+			const newRes = result.map( (i: any) => i.titulo);
+
+			(result.length > 0) && this.setState({ cateogrias: newRes });
+		};
 	};
 
 	render(): ReactElement<HTMLElement>
@@ -101,6 +118,7 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 						<TextField
 							inputProps={{maxLength: 30}}
 							type="text"
+							sx={{marginBottom: "15px"}}
 							onChange={(e) => this.setState({slug: e.target.value})}
 						/>
 
@@ -111,32 +129,49 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 								<TextField
 									inputProps={{maxLength: 30}}
 									type="text"
-									onChange={(e) => this.setState({slug: e.target.value})}
+									sx={{marginBottom: "15px"}}
+									onChange={(e) => this.setState({descricao: e.target.value})}
 								/>
+
+								<InputLabel sx={{fontSize: "25px"}}>Categoria:</InputLabel>
+								<Select
+									value={this.state.conteudo}
+									sx={{marginBottom: "15px"}}
+									onChange={(e) => this.state.categoria.push(e.target.value)}
+									renderValue={(selected) => (
+										<Box>
+										{
+											selected.map( (v) => <Chip key={v} label={v}/> )
+										}
+										</Box>
+									)}
+								>
+								{
+									this.state.categorias.length &&
+									this.state.categorias.map( (i:string) => (
+										<MenuItem key={i} value={i}>{i}</MenuItem>
+									))
+								}
+								</Select>
 
 								<InputLabel sx={{fontSize: "25px"}}>Conteúdo:</InputLabel>
 								<TextField
 									inputProps={{maxLength: 30}}
 									type="text"
-									onChange={(e) => this.setState({slug: e.target.value})}
-								/>
-
-								<InputLabel sx={{fontSize: "25px"}}>Categoria:</InputLabel>
-								<TextField
-									inputProps={{maxLength: 30}}
-									type="text"
-									onChange={(e) => this.setState({slug: e.target.value})}
+									multiline
+									sx={{marginBottom: "15px"}}
+									onChange={(e) => this.setState({conteudo: e.target.value})}
 								/>
 							</>
 						}
 
 						<Button
 							variant="contained"
-							color="success"
-							sx={{marginTop: "25px"}}
+							color="info"
+							sx={{marginBottom: "25px"}}
 							onClick={() => this.Api(this.state) }
 						>
-							Criar Categeoria
+							Criar { (this.props.type === "categoria" && 'Categeoria') || 'Postagem' }
 						</Button>
 					</Card>
 				</Container>
