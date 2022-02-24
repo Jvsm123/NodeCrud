@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 
 import { AllPostagensController } from '../../Controllers/Postagens/AllPostagensController';
 import { NewPostagensController } from '../../Controllers/Postagens/NewPostagensController';

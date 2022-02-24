@@ -1,24 +1,47 @@
-import { createConnection, getConnection } from 'typeorm';
+import { createConnection } from 'typeorm';
 
 const tryConnection = async () =>
 {
-	try
-	{
-		return await createConnection();
-	}
+	try { return await createConnection() }
 	catch( err )
 	{
-		setInterval( createConnection, 2000 );
+		console.error( err );
 
-		const conn = getConnection();
+		console.warn(" Tentaremos uma nova conexão em breve... ");
 
-		if( conn !instanceof Error )
+		const stop = ( connection: any ) =>
 		{
-			clearInterval();
+			clearInterval( refresh );
 
-			await conn.connect();
+			console.log("Conectado!");
+
+			return connection;
 		};
-	}
-}
+
+		const init = async () =>
+		{
+			console.log("\nTentando conexão...");
+
+			let reset = async () =>
+			{
+				try { return await createConnection() }
+				catch( err ) { return err };
+			};
+
+			reset().then( ( res: any ) =>
+			{
+				if( res instanceof Error )
+				{
+					console.warn("Erro ao tentar se conectar: \n" + res);
+
+					console.log("Tentaremos em breve outra vez...");
+				}
+				else stop( reset );
+			});
+		};
+
+		let refresh = setInterval( init, 150000 );
+	};
+};
 
 tryConnection();

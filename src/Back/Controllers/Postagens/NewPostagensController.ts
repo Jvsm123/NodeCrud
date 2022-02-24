@@ -10,10 +10,10 @@ export class NewPostagensController
 
 		const body = req.body;
 
-		if( !body.titulo || !body.slug || body.descricao || body.conteudo || body.categoria )
+		if( !body.titulo || !body.slug || !body.descricao || !body.conteudo || !body.categoria )
 			throw new Error("Faltam dados!!!");
 
-		const result = await newPostagensService.execute( req.body )
+		const result = await newPostagensService.execute( body );
 
 		return res.json( result );
 	};

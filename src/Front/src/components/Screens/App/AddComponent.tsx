@@ -2,10 +2,8 @@ import { Component, ReactElement } from 'react';
 
 import {
     Alert,
-	Box,
     Button,
     Card,
-	Chip,
     Container,
 	MenuItem,
     InputLabel,
@@ -30,8 +28,8 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 		titulo: "",
 		slug: "",
 		descricao: "",
-		categoria: [],
-		categorias: null,
+		categoria: "",
+		categorias: [],
 		conteudo: "",
 		redirectTo: null,
 		msg: "",
@@ -58,9 +56,7 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 		{
 			const result = await Api.ListAdm( "categorias" );
 
-			const newRes = result.map( (i: any) => i.titulo);
-
-			(result.length > 0) && this.setState({ cateogrias: newRes });
+			this.setState({ categorias: result.map( (i) => i.titulo ) });
 		};
 	};
 
@@ -109,14 +105,14 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 						<InputLabel sx={{fontSize: "25px"}}>Título:</InputLabel>
 						<TextField
 							type="text"
-							inputProps={{maxLength: 30}}
+							inputProps={{maxLength: 40}}
 							sx={{marginBottom: "15px"}}
 							onChange={(e) => this.setState({titulo: e.target.value})}
 						/>
 
 						<InputLabel sx={{fontSize: "25px"}}>Slug:</InputLabel>
 						<TextField
-							inputProps={{maxLength: 30}}
+							inputProps={{maxLength: 40}}
 							type="text"
 							sx={{marginBottom: "15px"}}
 							onChange={(e) => this.setState({slug: e.target.value})}
@@ -127,7 +123,7 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 							<>
 								<InputLabel sx={{fontSize: "25px"}}>Descrição:</InputLabel>
 								<TextField
-									inputProps={{maxLength: 30}}
+									inputProps={{maxLength: 120}}
 									type="text"
 									sx={{marginBottom: "15px"}}
 									onChange={(e) => this.setState({descricao: e.target.value})}
@@ -135,16 +131,9 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 
 								<InputLabel sx={{fontSize: "25px"}}>Categoria:</InputLabel>
 								<Select
-									value={this.state.conteudo}
+									value={this.state.categoria}
 									sx={{marginBottom: "15px"}}
-									onChange={(e) => this.state.categoria.push(e.target.value)}
-									renderValue={(selected) => (
-										<Box>
-										{
-											selected.map( (v) => <Chip key={v} label={v}/> )
-										}
-										</Box>
-									)}
+									onChange={(e) => this.setState({ categoria: e.target.value }) }
 								>
 								{
 									this.state.categorias.length &&
@@ -156,7 +145,6 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 
 								<InputLabel sx={{fontSize: "25px"}}>Conteúdo:</InputLabel>
 								<TextField
-									inputProps={{maxLength: 30}}
 									type="text"
 									multiline
 									sx={{marginBottom: "15px"}}

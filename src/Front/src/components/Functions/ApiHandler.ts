@@ -28,6 +28,8 @@ export class Api
 
 	static async SendAdm( type: string, state: TDataSend ): Promise< string >
 	{
+		console.log( state );
+
 		const response = await fetch( `${base}${type}/add`,
 		{
 			method: "POST",

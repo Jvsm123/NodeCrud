@@ -1,7 +1,7 @@
 export interface ITypeProps
 {
 	type: string;
-}
+};
 
 export interface IListState
 {
@@ -13,7 +13,7 @@ export interface IListState
 	openCircle: boolean;
 	openDialog: boolean;
 	redirectTo: string | null;
-}
+};
 
 export interface IAddState
 {
@@ -21,8 +21,8 @@ export interface IAddState
 	slug: string;
 	descricao?: string;
 	conteudo?: string | any[any];
-	categoria?: string[];
-	categorias?: string[] | null;
+	categoria?: string;
+	categorias?: readonly string[];
 
 	msg: string | number;
 	redirectTo: null | string;
