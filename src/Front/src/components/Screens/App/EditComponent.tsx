@@ -2,16 +2,18 @@ import { Component, ReactElement } from 'react';
 
 import {
 	Alert,
+	Backdrop,
+	Button,
 	Card,
 	CircularProgress,
 	Container,
-	Backdrop,
 	InputLabel,
-	TextField,
-	Button,
-	Typography,
+	MenuItem,
 	Snackbar,
-	Stack
+	Select,
+	Stack,
+	TextField,
+	Typography
 } from '@mui/material';
 
 import { Navigate } from 'react-router-dom';
@@ -26,11 +28,18 @@ export class EditComponent extends Component< ITypeProps, IEditState >
 {
 	state =
 	{
-		newTitulo: "",
-		newSlug: "",
 		id: "",
 		titulo: "",
 		slug: "",
+		descricao: "",
+		categoria: "",
+		categorias: [],
+		conteudo: "",
+		newTitulo: "",
+		newSlug: "",
+		newDesc: "",
+		newCategoria: "",
+		newConeteudo: "",
 		redirectTo: null,
 		pop: false,
 		openCircle: true
@@ -43,6 +52,9 @@ export class EditComponent extends Component< ITypeProps, IEditState >
 			id: res.id,
 			titulo: res.titulo,
 			slug: res.slug,
+			descricao: res.descricao,
+			conteudo: res.conteudo,
+			categoria: res.categoria,
 			openCircle: false
 		}));
 	};
@@ -160,11 +172,18 @@ export class EditComponent extends Component< ITypeProps, IEditState >
 								/>
 
 								<InputLabel sx={{fontSize: "25px"}}>Categoria:</InputLabel>
-								<TextField
-									inputProps={{maxLength: 30}}
-									type="text"
-									onChange={(e) => this.setState({slug: e.target.value})}
-								/>
+								<Select
+									value={this.state.categoria}
+									sx={{marginBottom: "15px"}}
+									onChange={(e: any) => this.setState({ categoria: e.target.value }) }
+								>
+								{
+									this.state.categorias.length &&
+									this.state.categorias.map( (i:string) => (
+										<MenuItem key={i} value={i}>{i}</MenuItem>
+									))
+								}
+								</Select>
 							</>
 						}
  

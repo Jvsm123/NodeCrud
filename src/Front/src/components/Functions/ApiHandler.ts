@@ -63,9 +63,9 @@ export class Api
 				slug: state.slug,
 				newTitulo: state.newTitulo,
 				newSlug: state.newSlug,
-				descricao: state.descricao,
-				conteudo: state.conteudo,
-				categoria: state.categoria
+				descricao: state.newDesc,
+				conteudo: state.newConteudo,
+				categoria: state.newCategoria
 			})
 		});
 

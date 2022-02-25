@@ -31,15 +31,18 @@ export interface IAddState
 
 export interface IEditState
 {
-	newTitulo: string;
-	newSlug: string;
+	id: string;
+	titulo: string;
+	slug: string;
 	descricao?: string;
 	conteudo?: string | any[any];
 	categoria?: string;
 
-	id: string;
-	titulo: string;
-	slug: string;
+	newTitulo: string;
+	newSlug: string;
+	newDesc?: string;
+	newCategoria?: string;
+	newConteudo?: string;
 
 	redirectTo: string | null;
 	pop: boolean;
