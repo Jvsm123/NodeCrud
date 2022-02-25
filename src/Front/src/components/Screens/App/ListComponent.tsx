@@ -128,6 +128,7 @@ export class ListComponent extends Component< ITypeProps, IListState >
 					{ (this.state.data && this.state.data.length > 0) &&
 					<List>
 						{ this.state.data.map( (e: any) =>
+						{ console.log(e)
 						<Card
 							sx={{ marginTop: "20px", marginBottom: "20px", padding: "10px" }}
 							variant="outlined"
@@ -137,6 +138,11 @@ export class ListComponent extends Component< ITypeProps, IListState >
 									<Typography variant="h5" color="secondary">{e.titulo}</Typography>
 
 									<ListItemText>Slug: {e.slug}</ListItemText>
+
+									{
+										this.props.type === "postagens" &&
+										<ListItemText>Categoria: {e.categoria}</ListItemText>
+									}
 
 									<ListItemText>Data de Criação: {e.created_at}</ListItemText>
 								</Stack>
@@ -155,6 +161,7 @@ export class ListComponent extends Component< ITypeProps, IListState >
 								</Stack>
 							</ListItem>
 						</Card>
+						}
 						)}
 					</List>
 					}

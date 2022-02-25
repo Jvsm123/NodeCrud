@@ -2,6 +2,8 @@ import { getCustomRepository } from 'typeorm';
 
 import { PostagensRepo } from '../../Repositories/PostsRepositories';
 
+import { CategoriasRepo } from '../../Repositories/CategoriasRepositories'
+
 import { INewPostagemData } from '../../Interfaces/Main';
 
 export class NewPostagensService
@@ -12,14 +14,20 @@ export class NewPostagensService
 		{
 			const postagensRepo = getCustomRepository( PostagensRepo );
 
-			if( !Data.titulo || !Data.slug )
-				throw new Error("Erro, faltam dados!");
+			const categoriasRepo = getCustomRepository( CategoriasRepo );
 
-			const alreadyCreated = await postagensRepo.findOne({ titulo: Data.titulo })
+			const newData: any = { ...Data };
+
+			const alreadyCreated = await postagensRepo.findOne({ titulo: newData.titulo })
 
 			if( alreadyCreated ) throw new Error("Essa postagem já existe!");
 
-			await postagensRepo.save( Data );
+			const categoria = await categoriasRepo
+				.findOne({where: {titulo: Data.titulo} });
+
+			newData.categoria = categoria;
+
+			await postagensRepo.save( newData );
 
 			return "Postagem criada com sucesso!";
 		}

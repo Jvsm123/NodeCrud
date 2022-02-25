@@ -1,5 +1,3 @@
-import { Categorias } from '../Database/Entities/Categorias';
-
 export interface IEditData
 {
 	titulo: string;
@@ -20,7 +18,7 @@ export interface INewPostagemData
 	slug: string;
 	descricao?: string;
 	conteudo?: string | any[any];
-	categoria?: Categorias;
+	categoria?: string;
 };
 
 export interface IEditPostagemData
