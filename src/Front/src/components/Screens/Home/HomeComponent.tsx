@@ -69,7 +69,7 @@ export class HomeComponent extends Component< {}, IHomeState >
 
 									<ListItemText>Descrição: {e.descricao}</ListItemText>
 
-									<Link to={`/postagem/${e.id}`}>
+									<Link to={`/post/${e.id}`}>
 										<Button variant="outlined" color="info">Saiba mais...</Button>
 									</Link>
 
