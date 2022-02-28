@@ -4,7 +4,7 @@ const base: string = "http://localhost:8081/backend/admin/";
 
 export class Api
 {
-	static async ListAdm( type: string ): Promise< any[] >
+	static async List( type: string ): Promise< any[] >
 	{
 		const response = await fetch( `${base}${type}/all` );
 
@@ -15,7 +15,7 @@ export class Api
 		return body;
 	};
 
-	static async ListOneAdm( type: string, id: string ): Promise< any[] >
+	static async ListOne( type: string, id: string ): Promise< any[] >
 	{
 		const response = await fetch( `${base}${type}/one/${id}` );
 
@@ -26,7 +26,7 @@ export class Api
 		return body;
 	}
 
-	static async SendAdm( type: string, state: TDataSend ): Promise< string >
+	static async Send( type: string, state: TDataSend ): Promise< string >
 	{
 		console.log( state );
 
@@ -51,7 +51,7 @@ export class Api
 		return body;
 	};
 
-	static async EditAdm( type: string, state: TDataEdit, ID: string ): Promise< string >
+	static async Edit( type: string, state: TDataEdit, ID: string ): Promise< string >
 	{
 		const response = await fetch( `${base}${type}/edit/${ID}`,
 		{
@@ -76,7 +76,7 @@ export class Api
 		return body;
 	};
 
-	static async RemoveAdm( type: string, ID: string ): Promise< string >
+	static async Remove( type: string, ID: string ): Promise< string >
 	{
 		const response = await fetch( `${base}${type}/remove/${ID}`,
 		{

@@ -3,8 +3,10 @@ import { Component } from 'react';
 //Not Found
 import { NotFound } from './erros/NotFound';
 
-//Admin
-import { IndexAdmin } from './admin/IndexAdmin';
+import { IndexPost } from './post/IndexPost';
+
+//Home
+import { IndexHome } from './home/IndexHome';
 
 //Users
 import { IndexUsuarios } from './usuarios/IndexUsuarios';
@@ -28,6 +30,10 @@ export class Router extends Component< {}, {} >
 		return (
 			<BrowserRouter>
 				<Routes>
+					<Route path="/" element={ <IndexHome/> }/>
+
+					<Route path="/post/:id" element={ <IndexPost/> }/>
+
 					<Route path="/admin">
 						<Route path="categorias" element={ <IndexCategorias/> }/>
 						<Route path="addcategorias" element={ <AddCategorias/> }/>

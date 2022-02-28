@@ -47,7 +47,7 @@ export class EditComponent extends Component< ITypeProps, IEditState >
 
 	ApiList( id: string ): void
 	{
-		Api.ListOneAdm( this.props.type, id ).then( (res: any) => this.setState(
+		Api.ListOne( this.props.type, id ).then( (res: any) => this.setState(
 		{
 			id: res.id,
 			titulo: res.titulo,
@@ -63,7 +63,7 @@ export class EditComponent extends Component< ITypeProps, IEditState >
 	{
 		if( state.newTitulo !== "" && state.newSlug !== "" )
 		{
-			Api.EditAdm( this.props.type, state, this.state.id ).then( (res: string) =>
+			Api.Edit( this.props.type, state, this.state.id ).then( (res: string) =>
 			{
 				sessionStorage.setItem( "msg", res );
 
@@ -160,13 +160,14 @@ export class EditComponent extends Component< ITypeProps, IEditState >
 								<InputLabel sx={{fontSize: "25px"}}>Descrição:</InputLabel>
 								<TextField
 									inputProps={{maxLength: 30}}
+									multiline
 									type="text"
 									onChange={(e) => this.setState({slug: e.target.value})}
 								/>
 
 								<InputLabel sx={{fontSize: "25px"}}>Conteúdo:</InputLabel>
 								<TextField
-									inputProps={{maxLength: 30}}
+									multiline
 									type="text"
 									onChange={(e) => this.setState({slug: e.target.value})}
 								/>

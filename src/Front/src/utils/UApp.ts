@@ -48,3 +48,8 @@ export interface IEditState
 	pop: boolean;
 	openCircle: boolean;
 };
+
+export interface IHomeState
+{
+	post: any[];
+};

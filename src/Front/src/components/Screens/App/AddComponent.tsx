@@ -36,11 +36,11 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 		pop: false
 	};
 
-	Api( state: IAddState ): void
+	SendApi( state: IAddState ): void
 	{
 		if( state.titulo !== "" && state.slug !== "" )
 		{
-			Api.SendAdm( this.props.type, state ).then( ( res: string ) =>
+			Api.Send( this.props.type, state ).then( ( res: string ) =>
 			{
 				sessionStorage.setItem("msg", res );
 
@@ -54,7 +54,7 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 	{
 		if( this.props.type === "postagens" )
 		{
-			const result = await Api.ListAdm( "categorias" );
+			const result = await Api.List( "categorias" );
 
 			this.setState({ categorias: result.map( (i) => i.titulo ) });
 		};
@@ -123,8 +123,9 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 							<>
 								<InputLabel sx={{fontSize: "25px"}}>Descrição:</InputLabel>
 								<TextField
-									inputProps={{maxLength: 120}}
+									inputProps={{maxLength: 220}}
 									type="text"
+									multiline
 									sx={{marginBottom: "15px"}}
 									onChange={(e) => this.setState({descricao: e.target.value})}
 								/>
@@ -157,7 +158,7 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 							variant="contained"
 							color="info"
 							sx={{marginBottom: "25px"}}
-							onClick={() => this.Api(this.state) }
+							onClick={() => this.SendApi(this.state) }
 						>
 							Criar { (this.props.type === "categoria" && 'Categeoria') || 'Postagem' }
 						</Button>

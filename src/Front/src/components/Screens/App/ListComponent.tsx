@@ -9,8 +9,6 @@ import {
 	Container,
 	Divider,
 	Dialog,
-	DialogContent,
-	DialogContentText,
 	DialogTitle,
 	DialogActions,
 	List,
@@ -46,7 +44,7 @@ export class ListComponent extends Component< ITypeProps, IListState >
  
 	async ApiDelete( ID: string ): Promise< void >
 	{
-		const res = await Api.RemoveAdm( this.props.type, ID );
+		const res = await Api.Remove( this.props.type, ID );
 	 
 		if( !res ) window.sessionStorage.setItem( "msg", "Erro ao remover!" );
 	 
@@ -57,7 +55,7 @@ export class ListComponent extends Component< ITypeProps, IListState >
  
 	async componentDidMount(): Promise< void >
 	{
-		const data = await Api.ListAdm( this.props.type );
+		const data = await Api.List( this.props.type );
 	 
 		const msg: string | null = sessionStorage.getItem("msg");
 
@@ -128,7 +126,6 @@ export class ListComponent extends Component< ITypeProps, IListState >
 					{ (this.state.data && this.state.data.length > 0) &&
 					<List>
 						{ this.state.data.map( (e: any) =>
-						{ console.log(e)
 						<Card
 							sx={{ marginTop: "20px", marginBottom: "20px", padding: "10px" }}
 							variant="outlined"
@@ -161,7 +158,6 @@ export class ListComponent extends Component< ITypeProps, IListState >
 								</Stack>
 							</ListItem>
 						</Card>
-						}
 						)}
 					</List>
 					}
