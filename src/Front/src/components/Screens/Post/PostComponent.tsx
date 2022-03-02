@@ -14,7 +14,7 @@ export class PostComponent extends Component< {}, IPostState >
 
 	async ListPost( ID: string ): Promise< void >
 	{
-		await Api.ListOne( 'postagans', ID ).then( (res: any[]) =>
+		await Api.ListOne( 'postagans', ID ).then( (res: any[any]) =>
 		{
 			this.setState({ post: res })
 		});
@@ -32,21 +32,19 @@ export class PostComponent extends Component< {}, IPostState >
 		return (
 			<>
 				<Navbar/>
-
 				{
-					(this.state.post == null) && (<Typography>Teste</Typography>) ||
-					(this.state.post != null) && (
+					this.state.post && (
 					<Container>
 						<Card>
-							<Typography variant="h3" color="info">{this.state.post.titulo}</Typography>
+							<Typography variant="h3" color="info">{this.state.post[0]!.titulo!}</Typography>
 
 							<hr/>
 
-							<small>Data de criação: {this.state.post.created_at}</small>
+							<small>Data de criação: {this.state.post[0]!.created_at}</small>
 
 							<hr/>
 
-							<Typography variant="h4">{this.state.post.conteudo}</Typography>
+							<Typography variant="h4">{this.state.post[0]!.conteudo}</Typography>
 						</Card>
 					</Container>)
 				}

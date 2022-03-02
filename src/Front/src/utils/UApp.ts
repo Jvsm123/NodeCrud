@@ -49,7 +49,14 @@ export interface IEditState
 	openCircle: boolean;
 };
 
-export interface IPostState
+interface Post
 {
-	post: any[any] | null;
+	titulo: string,
+	slug: string,
+	descricao: string,
+	conteudo: string | any[any],
+	categoria: string,
+	categorias: string[]
 };
+
+export interface IPostState { post: [Post] | null };
