@@ -49,7 +49,7 @@ export interface IEditState
 	openCircle: boolean;
 };
 
-export interface IHomeState
+export interface IPostState
 {
-	post: any[];
+	post: any[any] | null;
 };

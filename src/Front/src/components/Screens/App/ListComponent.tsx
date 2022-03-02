@@ -41,22 +41,29 @@ export class ListComponent extends Component< ITypeProps, IListState >
 		id: null,
 		redirectTo: null
 	};
- 
+
 	async ApiDelete( ID: string ): Promise< void >
 	{
 		const res = await Api.Remove( this.props.type, ID );
-	 
+
 		if( !res ) window.sessionStorage.setItem( "msg", "Erro ao remover!" );
-	 
+
 		window.sessionStorage.setItem( "msg", res );
-	 
+
 		this.componentDidMount();
 	};
- 
+
 	async componentDidMount(): Promise< void >
 	{
-		const data = await Api.List( this.props.type );
-	 
+		let data: any[];
+
+		if( this.props.type === "postagens" )
+			data = await Api.ListRelated( this.props.type );
+		else
+			data = await Api.List( this.props.type );
+
+		console.log( data );
+
 		const msg: string | null = sessionStorage.getItem("msg");
 
 		if( msg )
@@ -138,7 +145,7 @@ export class ListComponent extends Component< ITypeProps, IListState >
 
 									{
 										this.props.type === "postagens" &&
-										<ListItemText>Categoria: {e.categoria}</ListItemText>
+										<ListItemText>Categoria: {e.categoria.titulo}</ListItemText>
 									}
 
 									<ListItemText>Data de Criação: {e.created_at}</ListItemText>

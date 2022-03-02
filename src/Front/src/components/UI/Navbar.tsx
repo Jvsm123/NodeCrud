@@ -1,9 +1,11 @@
 import { Component, ReactElement } from 'react';
 
 import {
-    Stack,
-    Typography
+	Stack,
+	Typography
 } from '@mui/material';
+
+import { Link } from 'react-router-dom';
 
 export class Navbar extends Component< {}, {} >
 {
@@ -25,8 +27,10 @@ export class Navbar extends Component< {}, {} >
 				color="white"
 			>
 				<Stack direction="row" alignItems="center" spacing={ 2 } >
-					<Typography variant="h5">Blog do Node</Typography>
-					<Typography variant="h6">Home</Typography>
+					<Link to={`/`}>
+						<Typography variant="h5">Blog do Node</Typography>
+						<Typography variant="h6">Home</Typography>
+					</Link>
 					<Typography variant="h6">Categorias</Typography>
 					<Typography variant="h6">Login</Typography>
 					<Typography variant="h6">Registro</Typography>

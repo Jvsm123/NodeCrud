@@ -15,17 +15,17 @@ import { Link } from 'react-router-dom';
 
 import { Navbar } from '../../UI/Navbar';
 
-import { IHomeState } from '../../../utils/UApp';
+import { IPostState } from '../../../utils/UApp';
 
 import { Api } from '../../Functions/ApiHandler';
 
-export class HomeComponent extends Component< {}, IHomeState >
+export class HomeComponent extends Component< {}, IPostState >
 {
 	state = { post: [] };
 
 	async ListPost(): Promise< void >
 	{
-		await Api.List( 'postagens' ).then( (res: any[]) =>
+		await Api.ListRelated( 'postagens' ).then( (res: any[]) =>
 			this.setState({ post: res }) );
 	};
 
@@ -33,8 +33,6 @@ export class HomeComponent extends Component< {}, IHomeState >
 
 	render(): ReactElement< HTMLElement >
 	{
-		console.log( this.state.post );
-
 		return (
 			<>
 				<Navbar/>

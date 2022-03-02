@@ -24,12 +24,23 @@ export class Api
 		const body = await response.json();
 
 		return body;
-	}
+	};
+
+	static async ListRelated( type: string ): Promise< any[] >
+	{
+		const response = await fetch( `${base}${type}/all/related` );
+
+		if( response.status !== 200 ) throw new Error( "Erro" );
+
+		const body = await response.json();
+
+		if( typeof body === "string") throw new Error(`Erro: ${body}`);
+
+		return body;
+	};
 
 	static async Send( type: string, state: TDataSend ): Promise< string >
 	{
-		console.log( state );
-
 		const response = await fetch( `${base}${type}/add`,
 		{
 			method: "POST",

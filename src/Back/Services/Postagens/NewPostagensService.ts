@@ -23,7 +23,9 @@ export class NewPostagensService
 			if( alreadyCreated ) throw new Error("Essa postagem já existe!");
 
 			const categoria = await categoriasRepo
-				.findOne({where: {titulo: Data.titulo} });
+				.findOne({where: {titulo: Data.categoria} });
+
+			if( !categoria ) throw new Error("Erro ao adicionar a Categoria");
 
 			newData.categoria = categoria;
 
