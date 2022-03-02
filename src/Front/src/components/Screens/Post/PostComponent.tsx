@@ -10,13 +10,13 @@ import { Container, Card, Typography } from '@mui/material';
 
 export class PostComponent extends Component< {}, IPostState >
 {
-	state = { post: null };
+	state = { post: [''] };
 
 	async ListPost( ID: string ): Promise< void >
 	{
 		await Api.ListOne( 'postagans', ID ).then( (res: any[any]) =>
 		{
-			this.setState({ post: res })
+			this.setState({ post: res });
 		});
 	};
 
@@ -36,15 +36,15 @@ export class PostComponent extends Component< {}, IPostState >
 					this.state.post && (
 					<Container>
 						<Card>
-							<Typography variant="h3" color="info">{this.state.post[0]!.titulo!}</Typography>
+							<Typography variant="h3" color="info">{(this.state.post[0].titulo) ? this.state.post[0].titulo : ''}</Typography>
 
 							<hr/>
 
-							<small>Data de criação: {this.state.post[0]!.created_at}</small>
+							<small>Data de criação: {(this.state.post[0].created_at) ? this.state.post[0].created_at : ''}</small>
 
 							<hr/>
 
-							<Typography variant="h4">{this.state.post[0]!.conteudo}</Typography>
+							<Typography variant="h4">{this.state.post[0].conteudo ? this.state.post[0].conteudo : ''}</Typography>
 						</Card>
 					</Container>)
 				}

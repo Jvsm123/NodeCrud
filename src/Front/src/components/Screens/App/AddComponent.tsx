@@ -29,9 +29,9 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 		slug: "",
 		descricao: "",
 		categoria: "",
-		categorias: [],
+		categorias: "",
 		conteudo: "",
-		redirectTo: null,
+		redirectTo: "",
 		msg: "",
 		pop: false
 	};

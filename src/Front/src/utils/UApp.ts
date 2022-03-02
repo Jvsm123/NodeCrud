@@ -22,10 +22,10 @@ export interface IAddState
 	descricao?: string;
 	conteudo?: string | any[any];
 	categoria?: string;
-	categorias?: readonly string[];
+	categorias?: string | string[];
 
 	msg: string | number;
-	redirectTo: null | string;
+	redirectTo: string | null;
 	pop: boolean;
 };
 
@@ -49,14 +49,7 @@ export interface IEditState
 	openCircle: boolean;
 };
 
-interface Post
+export interface IPostState
 {
-	titulo: string,
-	slug: string,
-	descricao: string,
-	conteudo: string | any[any],
-	categoria: string,
-	categorias: string[]
+	post: any[] | null;
 };
-
-export interface IPostState { post: [Post] | null };
