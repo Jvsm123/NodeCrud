@@ -1,14 +1,14 @@
 import { getCustomRepository } from 'typeorm';
 
+import { INewData } from '../../Interfaces/Main';
+
 import { PostagensRepo } from '../../Repositories/PostsRepositories';
 
-import { CategoriasRepo } from '../../Repositories/CategoriasRepositories'
-
-import { INewPostagemData } from '../../Interfaces/Main';
+import { CategoriasRepo } from '../../Repositories/CategoriasRepositories';
 
 export class NewPostagensService
 {
-	async execute( Data: INewPostagemData ): Promise< string >
+	async execute( Data: INewData ): Promise< string >
 	{
 		try
 		{
@@ -16,18 +16,19 @@ export class NewPostagensService
 
 			const categoriasRepo = getCustomRepository( CategoriasRepo );
 
-			const newData: any = { ...Data };
+			const newData: INewData = { ...Data };
 
 			const alreadyCreated = await postagensRepo.findOne({ titulo: newData.titulo })
 
-			if( alreadyCreated ) throw new Error("Essa postagem já existe!");
+			if( alreadyCreated ) return "Essa postagem já existe!";
 
-			const categoria = await categoriasRepo
-				.findOne({where: {titulo: Data.categoria} });
+			const categoria = await categoriasRepo.findOne({where: {titulo: Data.categoria} });
 
 			if( !categoria ) throw new Error("Erro ao adicionar a Categoria");
 
 			newData.categoria = categoria;
+
+			newData.slug = newData.slug.replace('/\s/gi', '_').toLowerCase().trim();
 
 			await postagensRepo.save( newData );
 

@@ -6,15 +6,13 @@ import { PostagensRepo } from '../../Repositories/PostsRepositories';
 
 export class AllRelatedPostagensService
 {
-	async execute(): Promise< string | Postagens[] >
+	async execute(): Promise< Postagens[] >
 	{
 		try
 		{
 			const postagemRepo = getCustomRepository( PostagensRepo );
 
-			let allRelatedPost: Postagens[];
-
-			allRelatedPost = await postagemRepo.find(
+			const allRelatedPost = await postagemRepo.find(
 			{
 				order: { created_at: "DESC" },
 				relations: ["categoria"]
@@ -22,10 +20,6 @@ export class AllRelatedPostagensService
 
 			return allRelatedPost;
 		}
-		catch( err: any )
-		{
-			throw new Error(`Erro ao pegar informações: ${err}`);
-		};
-		
+		catch( err ) { throw new Error(`Erro ao pegar informações: ${err}`) };
 	};
 };

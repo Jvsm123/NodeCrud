@@ -8,12 +8,14 @@ export class AllCategoriasService
 {
 	async execute(): Promise< Categorias[] >
 	{
-		let allCategorias: Categorias[];
+		try
+		{
+			const categoriasRepo = getCustomRepository( CategoriasRepo );
 
-		const categoriasRepo = getCustomRepository( CategoriasRepo );
+			let result = await categoriasRepo.find({ order: { created_at: "DESC" } });
 
-		allCategorias = await categoriasRepo.find({ order: { created_at: "DESC" } });
-
-		return allCategorias;
+			return result;
+		}
+		catch( err ) { throw new Error("Erro ao tentar fazer oprações: " + err) };
 	};
 };

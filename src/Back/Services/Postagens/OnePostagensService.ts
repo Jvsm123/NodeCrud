@@ -1,16 +1,16 @@
 import { getCustomRepository } from 'typeorm';
 
-import { Categorias } from '../../Database/Entities/Categorias';
+import { Postagens } from '../../Database/Entities/Postagens';
 
-import { CategoriasRepo } from '../../Repositories/CategoriasRepositories';
+import { PostagensRepo } from '../../Repositories/PostsRepositories';
 
-export class OneCategoriasService
+export class OnePostagensService
 {
-	async execute( ID: string ): Promise< Categorias >
+	async execute( ID: string ): Promise< Postagens >
 	{
 		try
 		{
-			const categoriasRepo = getCustomRepository( CategoriasRepo );
+			const categoriasRepo = getCustomRepository( PostagensRepo );
 
 			const categorias = await categoriasRepo.findOne({ where: { id: ID } });
 

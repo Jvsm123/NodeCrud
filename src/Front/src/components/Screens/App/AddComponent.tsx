@@ -19,7 +19,7 @@ import { Navigate } from 'react-router-dom';
 
 import { Api } from '../../Functions/ApiHandler';
 
-import { ITypeProps, IAddState } from '../../../utils/UApp';
+import { ITypeProps, IAddState, IResults } from '../../../utils/UApp';
 
 export class AddComponent extends Component< ITypeProps, IAddState >
 {
@@ -29,7 +29,7 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 		slug: "",
 		descricao: "",
 		categoria: "",
-		categorias: "",
+		categorias: [],
 		conteudo: "",
 		redirectTo: "",
 		msg: "",
@@ -56,7 +56,7 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 		{
 			const result = await Api.List( "categorias" );
 
-			this.setState({ categorias: result.map( (i) => i.titulo ) });
+			this.setState({ categorias: result.map( (i: IResults) => i.titulo ) });
 		};
 	};
 
@@ -137,7 +137,7 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 									onChange={(e) => this.setState({ categoria: e.target.value }) }
 								>
 								{
-									this.state.categorias.length &&
+									( this.state.categorias.length ) &&
 									this.state.categorias.map( (i:string) => (
 										<MenuItem key={i} value={i}>{i}</MenuItem>
 									))

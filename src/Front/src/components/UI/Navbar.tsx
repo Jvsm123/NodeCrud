@@ -28,8 +28,10 @@ export class Navbar extends Component< {}, {} >
 			>
 				<Stack direction="row" alignItems="center" spacing={ 2 } >
 					<Link to={`/`}>
-						<Typography variant="h5">Blog do Node</Typography>
-						<Typography variant="h6">Home</Typography>
+						<Typography variant="h5" sx={{color: "white"}}>Blog do Node</Typography>
+					</Link>
+					<Link to={`/`}>
+						<Typography variant="h6" sx={{color: "white"}}>Home</Typography>
 					</Link>
 					<Typography variant="h6">Categorias</Typography>
 					<Typography variant="h6">Login</Typography>

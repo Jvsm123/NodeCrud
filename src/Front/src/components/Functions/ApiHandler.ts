@@ -1,10 +1,12 @@
 import { TDataSend, TDataEdit } from '../../utils/UFunctions';
 
+import { IResults } from '../../utils/UApp';
+
 const base: string = "http://localhost:8081/backend/admin/";
 
 export class Api
 {
-	static async List( type: string ): Promise< any[] >
+	static async List( type: string ): Promise< [IResults] >
 	{
 		const response = await fetch( `${base}${type}/all` );
 
@@ -15,9 +17,9 @@ export class Api
 		return body;
 	};
 
-	static async ListOne( type: string, id: string ): Promise< any[] >
+	static async ListOne( type: string, ID: string ): Promise< [IResults] >
 	{
-		const response = await fetch( `${base}${type}/one/${id}` );
+		const response = await fetch( `${base}${type}/one/${ID}` );
 
 		if( response.status !== 200 ) throw new Error( "ERRO" );
 
@@ -26,7 +28,7 @@ export class Api
 		return body;
 	};
 
-	static async ListRelated( type: string ): Promise< any[] >
+	static async ListRelated( type: string ): Promise< [IResults] >
 	{
 		const response = await fetch( `${base}${type}/all/related` );
 

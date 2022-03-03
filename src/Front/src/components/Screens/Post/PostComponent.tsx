@@ -2,7 +2,7 @@ import { Component, ReactElement } from 'react'
 
 import { Navbar } from '../../UI/Navbar';
 
-import { IPostState } from '../../../utils/UApp';
+import { IPostState, IResults } from '../../../utils/UApp';
 
 import { Api } from '../../Functions/ApiHandler';
 
@@ -10,21 +10,27 @@ import { Container, Card, Typography } from '@mui/material';
 
 export class PostComponent extends Component< {}, IPostState >
 {
-	state = { post: [''] };
+	state = { post: [] };
 
 	async ListPost( ID: string ): Promise< void >
 	{
-		await Api.ListOne( 'postagans', ID ).then( (res: any[any]) =>
+		await Api.ListOne( 'postagens', ID ).then( (res: [IResults] ) =>
 		{
-			this.setState({ post: res });
+			let t = [];
+
+			t.push(res);
+
+			this.setState({ post: t });
 		});
+
+		console.log( this.state.post )
 	};
 
-	componentDidMount(): void
+	async componentDidMount(): Promise< void >
 	{
-		const id: string = window.location.search.split('?id=')[1];
+		const id: string = window.location.pathname.split('/')[2];
 
-		this.ListPost( id );
+		await this.ListPost( id );
 	};
 
 	render(): ReactElement<HTMLElement>
@@ -33,7 +39,7 @@ export class PostComponent extends Component< {}, IPostState >
 			<>
 				<Navbar/>
 				{
-					this.state.post && (
+					this.state.post[0].hasOwnProperty('id') && (
 					<Container>
 						<Card>
 							<Typography variant="h3" color="info">{(this.state.post[0].titulo) ? this.state.post[0].titulo : ''}</Typography>

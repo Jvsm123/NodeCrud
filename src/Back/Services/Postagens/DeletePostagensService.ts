@@ -10,15 +10,12 @@ export class DeletePostagensService
 		{
 			const postagemRepo = getCustomRepository( PostagensRepo );
 
-			const result = await postagemRepo.delete( ID );
+			const deleteQuery = await postagemRepo.delete( ID );
 
-			if( !result ) return("Essa postagem não existe!");
+			if( !deleteQuery ) return("Essa postagem não existe!");
 
 			return "Deletado com sucesso!";
 		}
-		catch( err: any )
-		{
-			throw new Error(`Erro ao deletar: ${err}`);
-		}
+		catch( err ) { throw new Error(`Erro ao deletar: ${err}`) };
 	};
 };

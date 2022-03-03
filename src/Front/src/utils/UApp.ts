@@ -1,7 +1,13 @@
-export interface ITypeProps
+export interface IResults
 {
-	type: string;
-};
+	titulo: string;
+	slug: string;
+	descricao?: string;
+	conteudo?: string | any[any];
+	categoria?: string;
+}
+
+export interface ITypeProps { type: string };
 
 export interface IListState
 {
@@ -22,7 +28,7 @@ export interface IAddState
 	descricao?: string;
 	conteudo?: string | any[any];
 	categoria?: string;
-	categorias?: string | string[];
+	categorias?: Array< string > | null;
 
 	msg: string | number;
 	redirectTo: string | null;
@@ -51,5 +57,6 @@ export interface IEditState
 
 export interface IPostState
 {
-	post: any[] | null;
+	post: Array< IResults > | null;
 };
+

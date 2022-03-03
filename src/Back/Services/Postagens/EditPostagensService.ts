@@ -1,30 +1,32 @@
 import { getCustomRepository } from 'typeorm';
 
-import { IEditPostagemData } from '../../Interfaces/Main';
+import { IEditData } from '../../Interfaces/Main';
 
 import { PostagensRepo } from '../../Repositories/PostsRepositories';
 
 export class EditPostagensService
 {
-	async execute( data: IEditPostagemData, ID: string ): Promise< string >
+	async execute( Data: IEditData, ID: string ): Promise< string >
 	{
 		try
 		{
 			const postagemRepo = getCustomRepository( PostagensRepo );
 
-			let postagem = await postagemRepo.findOne({ where: { id: ID } })
+			const postagem = await postagemRepo.findOne({ where: { id: ID } })
+
+			Data.newSlug = Data.newSlug.replace('/\s/gi', '_').toLowerCase().trim();
 
 			if( postagem )
 			{
-				data.titulo && (postagem.titulo = data.titulo);
+				Data.newTitulo && (postagem.titulo = Data.newTitulo);
 
-				data.slug && (postagem.slug = data.slug);
+				Data.newSlug && (postagem.slug = Data.newSlug);
 
-				data.conteudo && (postagem.conteudo = data.conteudo);
+				Data.newConteudo && (postagem.conteudo = Data.newConteudo);
 
-				data.descricao && (postagem.descricao = data.descricao);
+				Data.newDescricao && (postagem.descricao = Data.newDescricao);
 
-				data.categoria && (postagem.categoria = data.categoria );
+				Data.newCategoria && (postagem.categoria = Data.newCategoria );
 			}
 			else return "Postagem não encontrada!";
 

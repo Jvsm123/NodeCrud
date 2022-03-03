@@ -6,7 +6,7 @@ import { CategoriasRepo } from '../../Repositories/CategoriasRepositories';
 
 export class EditCategoriasService
 {
-	async execute( data: IEditData, ID: string ): Promise< string >
+	async execute( Data: IEditData, ID: string ): Promise< string >
 	{
 		try
 		{
@@ -16,9 +16,11 @@ export class EditCategoriasService
 
 			if( !categoria ) return "categoria não encontrada!";
 
-			data.titulo && (categoria.titulo = data.titulo);
+			Data.newSlug = Data.newSlug.replace('/\s/gi', '_').toLowerCase().trim();
+
+			Data.newTitulo && (categoria.titulo = Data.newTitulo);
 		 
-			data.slug && (categoria.slug = data.slug);
+			Data.newSlug && (categoria.slug = Data.newSlug);
 
 			await categoriasRepo.update( ID, categoria );
 

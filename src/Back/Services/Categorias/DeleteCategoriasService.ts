@@ -10,15 +10,12 @@ export class DeleteCategoriasService
 		{
 			const categoriasRepo = getCustomRepository( CategoriasRepo );
 
-			const result = await categoriasRepo.delete( ID );
+			const deleteQuery = await categoriasRepo.delete( ID );
 
-			if( !result ) return("Essa categoria não existe!");
+			if( !deleteQuery ) return("Essa categoria não existe!");
 
 			return "Deletado com sucesso!";
 		}
-		catch( err: any )
-		{
-			throw new Error( `Erro ao tentar fazer operação: ${err}` );
-		};
+		catch( err ) { throw new Error( `Erro ao tentar fazer operação: ${err}` ) };
 	};
 };

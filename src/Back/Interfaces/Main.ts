@@ -1,31 +1,25 @@
-export interface IEditData
-{
-	titulo: string;
-	newTitulo: string;
-	slug: string;
-	newSlug: string;
-};
+import { Categorias } from '../Database/Entities/Categorias';
 
 export interface INewData
 {
 	titulo: string;
 	slug: string;
+	descricao?: string;
+	conteudo?: string | any[any];
+	categoria?: Categoria;
 };
 
-export interface INewPostagemData
+export interface IEditData
 {
 	titulo: string;
 	slug: string;
 	descricao?: string;
 	conteudo?: string | any[any];
-	categoria?: string;
-};
+	categoria?: Categorias;
 
-export interface IEditPostagemData
-{
-	titulo: string,
-	slug: string,
-	descricao?: string,
-	conteudo?: string | any[any],
-	categoria?: Categorias
+	newTitulo: string;
+	newSlug: string;
+	newDescricao?: string;
+	newConteudo?: string | any[];
+	newCategoria?: Categorias;
 };

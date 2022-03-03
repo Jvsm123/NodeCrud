@@ -1,8 +1,8 @@
 import { getCustomRepository } from 'typeorm';
 
-import { CategoriasRepo } from '../../Repositories/CategoriasRepositories';
-
 import { INewData } from '../../Interfaces/Main';
+
+import { CategoriasRepo } from '../../Repositories/CategoriasRepositories';
 
 export class NewCategoriasService
 {
@@ -11,6 +11,8 @@ export class NewCategoriasService
 		try
 		{
 			const categoriasRepo = getCustomRepository( CategoriasRepo );
+
+			Data.slug = Data.slug.replace('/\s/gi', '_').toLowerCase().trim();
 		 
 			await categoriasRepo.save( Data );
 
