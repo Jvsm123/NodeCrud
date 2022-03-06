@@ -17,7 +17,7 @@ export class Api
 		return body;
 	};
 
-	static async ListOne( type: string, ID: string ): Promise< [IResults] >
+	static async ListOne( type: string, ID: string ): Promise< IResults[] >
 	{
 		const response = await fetch( `${base}${type}/one/${ID}` );
 

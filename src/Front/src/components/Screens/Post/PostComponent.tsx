@@ -14,7 +14,7 @@ export class PostComponent extends Component< {}, IPostState >
 
 	async ListPost( ID: string ): Promise< void >
 	{
-		await Api.ListOne( 'postagens', ID ).then( (res: [IResults] ) =>
+		await Api.ListOne( 'postagens', ID ).then( (res: IResults[] ) =>
 		{
 			let t = [];
 
@@ -22,8 +22,6 @@ export class PostComponent extends Component< {}, IPostState >
 
 			this.setState({ post: t });
 		});
-
-		console.log( this.state.post )
 	};
 
 	async componentDidMount(): Promise< void >
@@ -35,25 +33,26 @@ export class PostComponent extends Component< {}, IPostState >
 
 	render(): ReactElement<HTMLElement>
 	{
+		const a = this.state.post;
+
+		console.log( a,  a.length >= 1 && a[0].hasOwnProperty('id') );
+
 		return (
 			<>
 				<Navbar/>
-				{
-					this.state.post[0].hasOwnProperty('id') && (
 					<Container>
 						<Card>
-							<Typography variant="h3" color="info">{(this.state.post[0].titulo) ? this.state.post[0].titulo : ''}</Typography>
+							<Typography variant="h2" color="info">{a.length >= 1 && a[0].hasOwnProperty('id') ? a[0].titulo : "Calma ;-;"}</Typography>
 
 							<hr/>
 
-							<small>Data de criação: {(this.state.post[0].created_at) ? this.state.post[0].created_at : ''}</small>
+							<small>Data de criação: {a.length >= 1 && a[0].hasOwnProperty('created_at') ? a[0].created_at : 'Calma'}</small>
 
 							<hr/>
 
-							<Typography variant="h4">{this.state.post[0].conteudo ? this.state.post[0].conteudo : ''}</Typography>
+							<Typography variant="h3">{a.length >= 1 && a[0].hasOwnProperty('conteudo') ? a[0].conteudo.data : 'Calma'}</Typography>
 						</Card>
-					</Container>)
-				}
+					</Container>
 			</>
 		);
 	};

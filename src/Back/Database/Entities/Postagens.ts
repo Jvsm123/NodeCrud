@@ -17,8 +17,8 @@ export class Postagens
 	@Column({ nullable: false, type: "text" })
 	descricao: string;
 
-	@Column({ nullable: false, type: "blob" })
-	conteudo?: string | any[any];
+	@Column({ nullable: false, type: "text" })
+	conteudo?: string | string[];
 
 	@CreateDateColumn()
 	created_at: Date;
