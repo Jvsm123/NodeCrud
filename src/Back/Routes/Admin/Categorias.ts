@@ -1,5 +1,9 @@
 import { Router, Request, Response } from 'express';
 
+import { validate } from '../../Middlewares/validation';
+
+import { schema } from '../../Utils/schemaValidationCategorias';
+
 import { OneCategoriasController } from '../../Controllers/Categorias/OneCategoriasController';
 import { AllCategoriasController } from '../../Controllers/Categorias/AllCategoriasController';
 import { NewCategoriasController } from '../../Controllers/Categorias/NewCategoriasController';
@@ -17,7 +21,7 @@ const deleteCategoriasController = new DeleteCategoriasController();
 Categorias.get('/categorias/all', allCategoriasController.handler);
 Categorias.get('/categorias/one/:id', oneCategoriasController.handler);
 
-Categorias.post('/categorias/add', newCategoriasController.handler);
+Categorias.post('/categorias/add', validate( schema ), newCategoriasController.handler);
 
 Categorias.put('/categorias/edit/:id', editCategoriasController.handler);
 

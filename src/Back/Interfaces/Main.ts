@@ -6,7 +6,7 @@ export interface INewData
 	slug: string;
 	descricao?: string;
 	conteudo?: string | any[any];
-	categoria?: Categoria;
+	categoria?: Categorias;
 };
 
 export interface IEditData

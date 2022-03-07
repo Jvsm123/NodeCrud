@@ -1,5 +1,9 @@
 import { Router } from 'express';
 
+import { validate } from '../../Middlewares/validation';
+
+import { schema } from '../../Utils/schemaValidationPostagens';
+
 import { AllPostagensController } from '../../Controllers/Postagens/AllPostagensController';
 import { NewPostagensController } from '../../Controllers/Postagens/NewPostagensController';
 import { OnePostagensController } from '../../Controllers/Postagens/OnePostagensController';
@@ -20,7 +24,7 @@ Postagens.get('/postagens/all', allPostagensController.handler);
 Postagens.get('/postagens/one/:id', onePostagensController.handler);
 Postagens.get('/postagens/all/related', allRelatedPostagensController.handler);
 
-Postagens.post('/postagens/add', newPostagensController.handler);
+Postagens.post('/postagens/add', validate( schema ), newPostagensController.handler);
 
 Postagens.put('/postagens/edit/:id', editPostagensController.handler);
 

@@ -1,24 +1,20 @@
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-process.env.TYPEORM_URL = process.env['DATABASE_URL'];
-
 import Express, { Request, Response, NextFunction } from 'express';
 
-import "reflect-metadata"; //Para uso do typeorm
-
-import "express-async-errors"; //Para uso de tratamento de erros no express;
-
-import "./Database/index";
+import Session from "express-session";
 
 import Admin from './Routes/Admin';
 
 // import Main from './Routes/Main';
 
-const Cors = require('cors');
+import ErrorHandler from './Middlewares/errorHandler';
 
-const Session = require("express-session");
+import Cors from 'cors';
+
+import { init } from './Settings';
+
+init();
+
+import "./Database/index";
 
 const Server = Express();
 
@@ -42,11 +38,6 @@ Server.use( '/admin', Admin.filter( i => i ) );
 // Server.use( '/', Main );
 
 // Middleware de erro para todos
-Server.use( ( err: Error, req: Request, res: Response, next: NextFunction ) =>
-{
-	if( err instanceof Error )
-		return res.status( 500 )
-		.json({ status: "Error", message: "" + err });
-});
+Server.use( ErrorHandler );
 
-Server.listen( "8080", () => console.log(">>>> LISTENING <<<<") );
+Server.listen( process.env.PORT, () => console.log(">>>> LISTENING <<<<") );
