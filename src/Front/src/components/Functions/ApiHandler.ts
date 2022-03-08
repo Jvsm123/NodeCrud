@@ -43,25 +43,27 @@ export class Api
 
 	static async Send( type: string, state: TDataSend ): Promise< string >
 	{
+		let body: any = { titulo: state.titulo, slug: state.slug };
+
+		if( type === "postagens" )
+		{
+			body.descricao = state.descricao;
+			body.conteudo = state.conteudo;
+			body.categoria = state.categoria;
+		}
+
 		const response = await fetch( `${base}${type}/add`,
 		{
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify (
-			{
-				titulo: state.titulo,
-				slug: state.slug,
-				descricao: state.descricao,
-				conteudo: state.conteudo,
-				categoria: state.categoria
-			})
+			body: JSON.stringify( body )
 		});
 
-		if( response.status !== 200 ) return "ERR";
+		if( response.status !== 200 ) return response.statusText;
 
-		const body = await response.json();
+		const result = await response.json();
 
-		return body;
+		return result;
 	};
 
 	static async Edit( type: string, state: TDataEdit, ID: string ): Promise< string >
