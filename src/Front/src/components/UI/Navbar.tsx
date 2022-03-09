@@ -1,11 +1,8 @@
+import { Link } from 'react-router-dom';
+
 import { Component, ReactElement } from 'react';
 
-import {
-	Stack,
-	Typography
-} from '@mui/material';
-
-import { Link } from 'react-router-dom';
+import { Stack, Typography } from '@mui/material';
 
 export class Navbar extends Component< {}, {} >
 {
@@ -30,10 +27,15 @@ export class Navbar extends Component< {}, {} >
 					<Link to={`/`}>
 						<Typography variant="h5" sx={{color: "white"}}>Blog do Node</Typography>
 					</Link>
+
 					<Link to={`/`}>
 						<Typography variant="h6" sx={{color: "white"}}>Home</Typography>
 					</Link>
-					<Typography variant="h6">Categorias</Typography>
+
+					<Link to={`/categorias`}>
+						<Typography variant="h6">Categorias</Typography>
+					</Link>
+
 					<Typography variant="h6">Login</Typography>
 					<Typography variant="h6">Registro</Typography>
 				</Stack>

@@ -4,8 +4,6 @@ import { Schema } from 'joi';
 
 export const validate = ( schema: Schema ) => ( req: Request, res: Response, next: NextFunction ) =>
 {
-	console.log( req.body, schema );
-
 	const { error } = schema.validate( req.body );
 
 	if( error ) return res.status(422).send(error.details[0].message);

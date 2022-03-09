@@ -1,5 +1,3 @@
-import { Component, ReactElement } from 'react';
-
 import {
     Alert,
     Button,
@@ -16,6 +14,8 @@ import {
 import { Navbar } from '../../UI/Navbar';
 
 import { Navigate } from 'react-router-dom';
+
+import { Component, ReactElement } from 'react';
 
 import { Api } from '../../Functions/ApiHandler';
 

@@ -3,7 +3,14 @@ import { Component } from 'react';
 //Not Found
 import { NotFound } from './erros/NotFound';
 
+//Postagem
 import { IndexPost } from './post/IndexPost';
+
+//Categorias
+import {  } from './postagensRelated/postagensRelated';
+
+//Categorias Home
+import { Categorias } from './categorias/Categorias';
 
 //Home
 import { IndexHome } from './home/IndexHome';
@@ -33,6 +40,8 @@ export class Router extends Component< {}, {} >
 					<Route path="/" element={ <IndexHome/> }/>
 
 					<Route path="/post/:id" element={ <IndexPost/> }/>
+
+					<Route path="/categorias" element={ <Categorias/> }/>
 
 					<Route path="/admin">
 						<Route path="categorias" element={ <IndexCategorias/> }/>

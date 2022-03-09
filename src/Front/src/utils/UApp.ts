@@ -7,6 +7,16 @@ export interface IResults
 	categoria?: string;
 }
 
+export interface IPostState
+{
+	post: Array< IResults > | null;
+};
+
+export interface ICategoriasState
+{
+	categorias: [] | any[];
+};
+
 export interface ITypeProps { type: string };
 
 export interface IListState
@@ -53,10 +63,5 @@ export interface IEditState
 	redirectTo: string | null;
 	pop: boolean;
 	openCircle: boolean;
-};
-
-export interface IPostState
-{
-	post: Array< IResults > | null;
 };
 

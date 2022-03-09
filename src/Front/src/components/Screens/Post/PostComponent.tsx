@@ -35,24 +35,22 @@ export class PostComponent extends Component< {}, IPostState >
 	{
 		const a = this.state.post;
 
-		console.log( a,  a.length >= 1 && a[0].hasOwnProperty('id') );
-
 		return (
 			<>
 				<Navbar/>
-					<Container>
-						<Card>
-							<Typography variant="h2" color="info">{a.length >= 1 && a[0].hasOwnProperty('id') ? a[0].titulo : "Calma ;-;"}</Typography>
+				<Container>
+					<Card>
+						<Typography variant="h2" color="info">{a.length >= 1 && a[0].hasOwnProperty('id') ? a[0].titulo : "Calma ;-;"}</Typography>
 
-							<hr/>
+						<hr/>
 
-							<small>Data de criação: {a.length >= 1 && a[0].hasOwnProperty('created_at') ? a[0].created_at : 'Calma'}</small>
+						<small>Data de criação: {a.length >= 1 && a[0].hasOwnProperty('created_at') ? a[0].created_at : 'Calma'}</small>
 
-							<hr/>
+						<hr/>
 
-							<Typography variant="h3">{a.length >= 1 && a[0].hasOwnProperty('conteudo') ? a[0].conteudo.data : 'Calma'}</Typography>
-						</Card>
-					</Container>
+						<Typography variant="h3">{a.length >= 1 && a[0].hasOwnProperty('conteudo') ? a[0].conteudo : 'Calma'}</Typography>
+					</Card>
+				</Container>
 			</>
 		);
 	};
