@@ -13,7 +13,7 @@ export class NewCategoriasService
 			const categoriasRepo = getCustomRepository( CategoriasRepo );
 
 			Data.slug = Data.slug.replace('/\s/gi', '_').toLowerCase().trim();
-		 
+
 			await categoriasRepo.save( Data );
 
 			return "Categoria criada com sucesso!";
