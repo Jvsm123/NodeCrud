@@ -4,6 +4,8 @@ import { Component, ReactElement } from 'react';
 
 import { Api } from '../../Functions/ApiHandler';
 
+import { Link } from 'react-router-dom';
+
 import { Container, Card, Typography } from '@mui/material';
 
 import { ITypeProps, ICategoriasState } from '../../../utils/UApp';
@@ -28,11 +30,17 @@ export class Categorias extends Component< ITypeProps, ICategoriasState >
 				<Navbar/>
 
 				<Container>
-					{c.length > 0 && c.map( (i: any) => (
-						<Card>
-							<Typography>{i.titulo}</Typography>
-						</Card>
+					{ c.length > 0 && c.map( (i: any) => (
+						<>
+							<Card>
+								<Link to={`/categorias/${i.titulo}`}>
+									<Typography>{i.titulo}</Typography>
+								</Link>
+							</Card>
+							<br/>
+						</>
 					))}
+					<hr/>
 				</Container>
 			</>
 		);

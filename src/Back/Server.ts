@@ -2,9 +2,7 @@ import Express, { Request, Response, NextFunction } from 'express';
 
 import Session from "express-session";
 
-import Admin from './Routes/Admin';
-
-// import Main from './Routes/Main';
+import Main from './Routes';
 
 import ErrorHandler from './Middlewares/errorHandler';
 
@@ -34,8 +32,7 @@ const Server = Express();
 	Server.use( Cors() );
  
 //Rotas
-Server.use( '/admin', Admin.filter( i => i ) );
-// Server.use( '/', Main );
+Server.use( '/', Main.filter( i => i ) );
 
 // Middleware de erro para todos
 Server.use( ErrorHandler );

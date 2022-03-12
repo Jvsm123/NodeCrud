@@ -1,15 +1,15 @@
 import { Router } from 'express';
 
-import { validate } from '../../Middlewares/validation';
+import { validate } from '../Middlewares/validation';
 
-import { schema } from '../../Utils/schemaValidationPostagens';
+import { schema } from '../Utils/schemaValidationPostagens';
 
-import { AllPostagensController } from '../../Controllers/Postagens/AllPostagensController';
-import { NewPostagensController } from '../../Controllers/Postagens/NewPostagensController';
-import { OnePostagensController } from '../../Controllers/Postagens/OnePostagensController';
-import { EditPostagensController } from '../../Controllers/Postagens/EditPostagensController';
-import { DeletePostagensController } from '../../Controllers/Postagens/DeletePostagensController';
-import { AllRelatedPostagensController } from '../../Controllers/Postagens/AllRelatedPostagensController';
+import { AllPostagensController } from '../Controllers/Postagens/AllPostagensController';
+import { NewPostagensController } from '../Controllers/Postagens/NewPostagensController';
+import { OnePostagensController } from '../Controllers/Postagens/OnePostagensController';
+import { EditPostagensController } from '../Controllers/Postagens/EditPostagensController';
+import { DeletePostagensController } from '../Controllers/Postagens/DeletePostagensController';
+import { AllRelatedPostagensController } from '../Controllers/Postagens/AllRelatedPostagensController';
 
 export const Postagens = Router();
 

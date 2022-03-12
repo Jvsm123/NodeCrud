@@ -7,7 +7,7 @@ import { NotFound } from './erros/NotFound';
 import { IndexPost } from './post/IndexPost';
 
 //Categorias
-import {  } from './postagensRelated/postagensRelated';
+import { PostagensRelated } from './postagensRelated/postagensRelated';
 
 //Categorias Home
 import { Categorias } from './categorias/Categorias';
@@ -42,6 +42,8 @@ export class Router extends Component< {}, {} >
 					<Route path="/post/:id" element={ <IndexPost/> }/>
 
 					<Route path="/categorias" element={ <Categorias/> }/>
+
+					<Route path="/categorias/:nome" element={ <PostagensRelated/> }/>
 
 					<Route path="/admin">
 						<Route path="categorias" element={ <IndexCategorias/> }/>

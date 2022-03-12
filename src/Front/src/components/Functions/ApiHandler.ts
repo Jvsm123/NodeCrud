@@ -2,7 +2,7 @@ import { TDataSend, TDataEdit } from '../../utils/UFunctions';
 
 import { IResults } from '../../utils/UApp';
 
-const base: string = "http://localhost:8081/backend/admin/";
+const base: string = "http://localhost:8081/backend/";
 
 export class Api
 {
@@ -10,7 +10,7 @@ export class Api
 	{
 		const response = await fetch( `${base}${type}/all` );
 
-		if( response.status !== 200 ) throw new Error( "ERRO" );
+		if( response.status !== 200 ) throw new Error( response.statusText );
 
 		const body = await response.json();
 
@@ -21,18 +21,20 @@ export class Api
 	{
 		const response = await fetch( `${base}${type}/one/${ID}` );
 
-		if( response.status !== 200 ) throw new Error( "ERRO" );
+		if( response.status !== 200 ) throw new Error( response.statusText );
 
 		const body = await response.json();
 
 		return body;
 	};
 
-	static async ListRelated( type: string ): Promise< [IResults] >
+	static async ListRelated( type: string, ID?: string ): Promise< [IResults] >
 	{
-		const response = await fetch( `${base}${type}/all/related` );
+		let url = `${base}${type}/all/related`; (ID) && (url += `/${ID}`);
 
-		if( response.status !== 200 ) throw new Error( "Erro" );
+		const response = await fetch( url );
+
+		if( response.status !== 200 ) throw new Error( response.statusText );
 
 		const body = await response.json();
 
@@ -84,7 +86,7 @@ export class Api
 			})
 		});
 
-		if( response.status !== 200 ) return "ERRR";
+		if( response.status !== 200 ) return response.statusText;
 
 		const body = await response.json();
 
@@ -98,7 +100,7 @@ export class Api
 			method: "DELETE"
 		});
 
-		if( response.status !== 200 ) return "ERRR";
+		if( response.status !== 200 ) return response.statusText;
 
 		const body = await response.json();
 
