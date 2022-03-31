@@ -16,12 +16,11 @@ export class PostagensRelated extends Component< {}, ICategoriasState >
 
 	async CategoriaRelated( titulo: string ): Promise< void >
 	{
-		await Api.ListRelated( 'categorias', titulo ).then( (res: any) =>
-		{
-			console.log( res );
-
-			this.setState({ categorias: res });
-		});
+		await Api
+			.ListRelated( 'categorias', titulo )
+			.then( (res: any) =>
+				this.setState({ categorias: res })
+			);
 	};
 
 	componentDidMount(): void
@@ -33,16 +32,18 @@ export class PostagensRelated extends Component< {}, ICategoriasState >
 
 	render(): ReactElement< HTMLElement >
 	{
-		const c = this.state.categorias;
+		let c = this.state.categorias;
 
 		return (
 			<>
 				<Navbar/>
 
 				<Container>
-					<Typography>{c.hasOwnProperty('title') && c.title}</Typography>
+					<Typography>{c.hasOwnProperty('titulo') && c.titulo}</Typography>
+
 					<br/>
-					{ c.hasOwnProperty('postagens') && c.length > 0 && c.postagens.map( (e:any) => (
+
+					{ (c.hasOwnProperty('postagens') && c.length > 0) && c.postagens.map( (e:any) => (
 						<Link to={`/post/${e.id}`}>
 							<Card>
 								<Typography>{e.titulo}</Typography>

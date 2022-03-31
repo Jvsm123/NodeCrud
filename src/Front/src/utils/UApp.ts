@@ -14,7 +14,7 @@ export interface IPostState
 
 export interface ICategoriasState
 {
-	categorias: [] | any[];
+	categorias: [] | IResults[];
 };
 
 export interface ITypeProps { type: string };
