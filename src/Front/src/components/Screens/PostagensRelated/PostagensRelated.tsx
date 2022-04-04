@@ -6,7 +6,7 @@ import { Api } from '../../Functions/ApiHandler';
 
 import { Link } from 'react-router-dom';
 
-import { ICategoriasState } from '../../../utils/UApp';
+import { ICategoriasState, IResults } from '../../../utils/UApp';
 
 import { Container, Typography, Card } from '@mui/material';
 
@@ -18,7 +18,7 @@ export class PostagensRelated extends Component< {}, ICategoriasState >
 	{
 		await Api
 			.ListRelated( 'categorias', titulo )
-			.then( (res: any) =>
+			.then( (res: [IResults]) =>
 				this.setState({ categorias: res })
 			);
 	};
@@ -32,15 +32,15 @@ export class PostagensRelated extends Component< {}, ICategoriasState >
 
 	render(): ReactElement< HTMLElement >
 	{
-		let c = this.state.categorias;
+		const c: [IResults] | any = this.state.categorias;
 
-		return (
+		if( c.length > 0 ) return (
 			<>
 				<Navbar/>
 
 				<Container>
-					<Typography>{c.hasOwnProperty('titulo') && c.titulo}</Typography>
-
+					<Typography>{c.titulo}</Typography>
+	
 					<br/>
 
 					{ (c.hasOwnProperty('postagens') && c.length > 0) && c.postagens.map( (e:any) => (
@@ -53,6 +53,7 @@ export class PostagensRelated extends Component< {}, ICategoriasState >
 					))}
 				</Container>
 			</>
-		);
+		)
+		else return <Navbar/>
 	};
 };
