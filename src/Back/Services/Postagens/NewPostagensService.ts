@@ -30,6 +30,13 @@ export class NewPostagensService
 
 			newData.slug = newData.slug.replace('/\s/gi', '_').toLowerCase().trim();
 
+			console.debug(
+				"Aqui tem um debug!
+				!!!!!!!!!!!!!!!!!!!
+				!!!!!!!!!!!!!!!!!!
+				!!!" + newData
+			);
+
 			await postagensRepo.save( newData );
 
 			return "Postagem criada com sucesso!";

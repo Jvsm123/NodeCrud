@@ -1,6 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
 
-import { UsuariosMysql } from '../database/entities/UsuariosMysql';
+import { Usuarios } from '../database/entities/Usuarios';
 
-@EntityRepository( UsuariosMysql )
-export class UsuariosMysqlRepo extends Repository< UsuariosMysql > { };
+@EntityRepository( Usuarios )
+export class UsuariosMysqlRepo extends Repository< Usuarios > { };

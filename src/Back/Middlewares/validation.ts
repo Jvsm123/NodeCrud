@@ -6,7 +6,9 @@ export const validate = ( schema: Schema ) => ( req: Request, res: Response, nex
 {
 	const { error } = schema.validate( req.body );
 
-	if( error ) return res.status(422).send(error.details[0].message);
+	if( error ) return res
+		.status( 422 )
+		.send( error.details[0].message );
 
 	next();
 };
