@@ -29,3 +29,5 @@ src/**/package-lock.json
 src/**/npm-debug.log*
 src/**/yarn-debug.log*
 src/**/yarn-error.log*
+
+yarn.lock
