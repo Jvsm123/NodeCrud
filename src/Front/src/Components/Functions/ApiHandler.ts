@@ -1,6 +1,6 @@
 import { TDataSend, TDataEdit } from '../../Utils/UFunctions';
 
-	import { IResults } from '../../Utils/UApp';
+import { IResults } from '../../Utils/UApp';
 
 const base: string = "http://localhost:8081/backend/";
 

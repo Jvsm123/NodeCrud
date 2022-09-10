@@ -9,7 +9,7 @@ const prompt = () =>
       type: "list",
       name: "manager",
       message: "Qual gerênciador de pacotes gostária de usar?",
-      choices: ["Npm", "Yarn"],
+      choices: ["npm", "yarn"],
     },
     {
       type: "list",
@@ -28,48 +28,22 @@ const init = () => {
     const { manager, environment } = options
 
     try {
-      if (manager === "Npm")
         tasks.push({
           title: "Instalando dependências",
           task: () => {
-            spin.text = "Configurando Backend"
+            spin.text = "Configurando Backend\n"
             spin.start()
 
             shell.cd("./src/Back")
-            shell.exec("npm install")
+            shell.exec(`${manager} install`)
 
             spin.stop()
-            spin.text = "Configurando Frontend"
+            spin.text = "Configurando Frontend\n"
             spin.start()
 
             shell.cd("-")
             shell.cd("./src/Front")
-            shell.exec("npm install")
-
-            shell.cd("..")
-            shell.cd("..")
-
-            spin.stop()
-          },
-        })
-      else
-        tasks.push({
-          title: "Instalando dependências",
-          task: () => {
-            spin.text = "Configurando Backend"
-            spin.start()
-
-            shell.cd("./src/Back")
-            shell.exec("\nyarn install")
-
-            spin.stop()
-
-            spin.text = "Configurando Frontend"
-            spin.start()
-
-            shell.cd("-")
-            shell.cd("./src/Front")
-            shell.exec("\nyarn install")
+            shell.exec(`${manager} install`)
 
             shell.cd("..")
             shell.cd("..")

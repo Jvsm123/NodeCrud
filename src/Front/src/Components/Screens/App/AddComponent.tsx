@@ -68,6 +68,7 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 		return (
 			<>
 				<Navbar/>
+
 				{
 					this.state.pop && <Snackbar
 						open={this.state.pop}
@@ -87,8 +88,7 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 						alignSelf: "flex-start",
 						marginBottom:"15px",
 						color: "#707070"
-					}}
-					>
+					}}>
 						{ this.props.type === "categorias" && 'Nova Categoria'}
 						{ this.props.type === "postagens" && 'Nova Postagem'}
 					</Typography>
@@ -160,7 +160,7 @@ export class AddComponent extends Component< ITypeProps, IAddState >
 							sx={{marginBottom: "25px"}}
 							onClick={() => this.SendApi(this.state) }
 						>
-							Criar { (this.props.type === "categoria" && 'Categeoria') || 'Postagem' }
+							Criar { (this.props.type === "categoria" && 'Categoria') || 'Postagem' }
 						</Button>
 					</Card>
 				</Container>
